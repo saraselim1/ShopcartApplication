@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.beans.Category;
 import model.beans.Product;
 import oracle.jdbc.driver.OracleDriver;
@@ -25,18 +27,34 @@ public class CategoryDAO {
     private Statement stmt;
     String query;
     ResultSet rs;
+    boolean connectionState=false;
     public CategoryDAO(){
-       try
-		{
-			DriverManager.registerDriver(new OracleDriver());
-			connection=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","bothinah","123");
-                        stmt=connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                }catch(SQLException ex)
-                {
-                        ex.printStackTrace();
-                }
+//			DriverManager.registerDriver(new OracleDriver());
+//			connection=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","dbuser","dbuser");
+//                        stmt=connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                
     }
-    
+    public boolean connect() {
+        try {
+                    DriverManager.registerDriver(new OracleDriver());
+                    connection=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","dbuser","dbuser");
+                    stmt=connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                    connectionState=true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return connectionState;
+    }
+
+    public void disconnect() {
+        try {
+            if (connectionState) {
+                connection.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public int addCategory(Category c){
         boolean exist=false;
         int rows=0;           
