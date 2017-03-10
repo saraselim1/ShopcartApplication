@@ -98,7 +98,7 @@ public class ProductDAO {
               return rows;
     }
     
-    public int deleteProduct(int id){
+    public int deleteProduct(String name){
         {
             int rows_effected=0;
               try{
@@ -107,9 +107,9 @@ public class ProductDAO {
                     rs.beforeFirst();
                     while(rs.next())
                     {
-                        if(id==rs.getInt("ID"))
+                        if(name==rs.getString("NAME"))
                         {
-                           query=new String("delete from product where ID ="+id);
+                           query=new String("delete from product where NAME ='"+name+"'");
                            rows_effected=connection.createStatement().executeUpdate(query); 
                         }
                     }    
@@ -171,10 +171,14 @@ public class ProductDAO {
          return products;
     }
     
-    public ArrayList<Product> getProductByCategory(int categoryId){
+    public ArrayList<Product> getProductByCategory(String name){
         ArrayList<Product> products = null;
          try{
                 products = new ArrayList<Product>();
+                query=new String("select * from CATEGORY where NAME ='"+name+"'");
+                rs=stmt.executeQuery(query);
+                rs.next();
+                int categoryId = rs.getInt("ID");
                 query=new String("select * from product where CATEGORY_ID ="+categoryId);
                 rs=stmt.executeQuery(query);
                     while (rs.next())
