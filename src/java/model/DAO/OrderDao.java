@@ -9,6 +9,12 @@ package model.DAO;
  *
  * @author Masoud
  */
-public class OrderDao {
-    
+public class OrderDao extends DBConnector {
+
+    public OrderDao() {
+        select = "select * from order where user_name = ?";
+        insert = "insert into users (user_name, fname, lname, email, gender) values (?, ?, ?, ?, ?)";
+        update = "update users set user_name = ?, fname = ?, lname = ?, email = ?, gender = ? where user_name = ?";
+        delete = "delete from users where user_name = ?";
+    }
 }
