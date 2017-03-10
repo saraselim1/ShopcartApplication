@@ -64,8 +64,8 @@ public class ProductDAO {
                     }
                     if(!exist)
                     {
-                        String new_query=new String("insert into product values (" + p.getId() +","
-                            +"'"+p.getName()+"',"
+                        String new_query=new String("insert into product (NAME, QUANTITY_IN_STOCK, PRICE, OFFER, DESCRIPTION, CATEGORY_ID) values ('"
+                            +p.getName()+"',"
                             +p.getQuantity()+","
                             +p.getPrice()+","
                             +p.getOffer()+","
