@@ -22,12 +22,17 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String fname, String lname, String email, String gender) {
+    public User(int id,String userName, String fname, String lname, String email, String gender) {
+        this.id = id;
         this.userName = userName;
         this.fname = fname;
         this.lname = lname;
         this.email = email;
         this.gender = gender;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Cart getCart() {

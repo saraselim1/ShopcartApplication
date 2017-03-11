@@ -19,6 +19,10 @@ public class Order {
     private int totalPrice;
     private Date date;
     private int userId;
+
+    public void setId(int id) {
+        this.id = id;
+    }
     List<UserProduct> product;
 
     public List<UserProduct> getProduct() {
@@ -32,7 +36,8 @@ public class Order {
     public Order() {
     }
 
-    public Order(int totalPrice, Date date, int userId) {
+    public Order(int id,int totalPrice, Date date, int userId) {
+        this.id = id;
         this.totalPrice = totalPrice;
         this.date = date;
         this.userId = userId;
