@@ -11,23 +11,23 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.DAO.ProductDAO;
-import model.beans.Product;
+import model.DAO.CategoryDAO;
+import model.beans.Category;
 
 /**
  *
  * @author Pc
  */
-public class GetAllProductsServlet extends HttpServlet {
+public class GetAllCategorysServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Product> products = null;
-        ProductDAO productDAO =new ProductDAO();
-        if(productDAO.connect()){
-            products = productDAO.getAllProducts();
-            request.setAttribute("productList", products);
-            productDAO.disconnect();
+        ArrayList<Category> categorys = null;
+        CategoryDAO categoryDAO =new CategoryDAO();
+        if(categoryDAO.connect()){
+            categorys = categoryDAO.getAllCategorys();
+            request.setAttribute("categoryList", categorys);
+            categoryDAO.disconnect();
             //dispatcher
         }
         
@@ -37,12 +37,12 @@ public class GetAllProductsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        
-        ArrayList<Product> products = null;
-        ProductDAO productDAO =new ProductDAO();
-        if(productDAO.connect()){
-            products = productDAO.getAllProducts();
-            request.setAttribute("productList", products);
-            productDAO.disconnect();
+        ArrayList<Category> categorys = null;
+        CategoryDAO categoryDAO =new CategoryDAO();
+        if(categoryDAO.connect()){
+            categorys = categoryDAO.getAllCategorys();
+            request.setAttribute("categoryList", categorys);
+            categoryDAO.disconnect();
             //dispatcher
         }
         

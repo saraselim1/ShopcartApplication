@@ -92,7 +92,7 @@ public class CategoryDAO {
               return rows;
     }
     
-    public int deleteCategory(int id){
+    public int deleteCategory(String name){
         {
             int rows_effected=0;
               try{
@@ -101,9 +101,9 @@ public class CategoryDAO {
                     rs.beforeFirst();
                     while(rs.next())
                     {
-                        if(id==rs.getInt("ID"))
+                        if(name==rs.getString("NAME"))
                         {
-                           query=new String("delete from CATEGORY where ID ="+id);
+                           query=new String("delete from CATEGORY where NAME ="+name);
                            rows_effected=connection.createStatement().executeUpdate(query); 
                         }
                     }    

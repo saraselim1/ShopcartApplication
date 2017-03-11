@@ -12,49 +12,48 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.DAO.ProductDAO;
+import model.DAO.CategoryDAO;
 
 /**
  *
  * @author Pc
  */
-public class DeleteProductServlet extends HttpServlet {
-
-   @Override
+public class DeleteCategoryServlet extends HttpServlet{
+    
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ProductDAO productDAO =new ProductDAO();
+        CategoryDAO categoryDAO =new CategoryDAO();
         String name;
         try{
-            if(productDAO.connect()){
-                name=(String) request.getAttribute("productName");
-                productDAO.deleteProduct(name);
+            if(categoryDAO.connect()){
+                name=(String) request.getAttribute("categoryName");
+                categoryDAO.deleteCategory(name);
             }
                   
         }catch (Exception ex) {
-            Logger.getLogger(AddProductSevlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteCategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
-            productDAO.disconnect();
+            categoryDAO.disconnect();
         }
        
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ProductDAO productDAO =new ProductDAO();
+         CategoryDAO categoryDAO =new CategoryDAO();
         String name;
         try{
-            if(productDAO.connect()){
-                name=(String) request.getAttribute("productName");
-                productDAO.deleteProduct(name);
+            if(categoryDAO.connect()){
+                name=(String) request.getAttribute("categoryName");
+                categoryDAO.deleteCategory(name);
             }
                   
         }catch (Exception ex) {
-            Logger.getLogger(AddProductSevlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteCategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
-            productDAO.disconnect();
+            categoryDAO.disconnect();
         }
     
     }
-    
     
 }
