@@ -5,6 +5,7 @@
  */
 package model.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,12 +18,12 @@ public class Category {
     private String name;
     private String description;
     private int productNum;
-    List<Product> products;
+    ArrayList<Product> products;
 
     public Category() {
     }
 
-    public Category(String name, String description, int productNum, List<Product> products) {
+    public Category(String name, String description, int productNum, ArrayList<Product> products) {
         this.name = name;
         this.description = description;
         this.productNum = productNum;
@@ -53,16 +54,20 @@ public class Category {
         this.productNum = productNum;
     }
 
-    public List<Product> getProducts() {
+    public ArrayList<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
 
     public int getId() {
         return id;
+    }
+    
+    public void setId(int id){
+        this.id=id;
     }
 
 }
