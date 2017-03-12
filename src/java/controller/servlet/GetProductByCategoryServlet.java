@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,10 +23,10 @@ public class GetProductByCategoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Product> products = null;
-        ProductDAO productDAO =new ProductDAO();
+        ProductDAO productDAO = new ProductDAO();
         String name;
-        if(productDAO.connect()){
-            name=(String) request.getAttribute("categoryName");
+        if (productDAO.connect()) {
+            name = (String) request.getAttribute("categoryName");
             products = productDAO.getProductByCategory(name);
             request.setAttribute("productListByCategory", products);
             productDAO.disconnect();
@@ -37,17 +37,15 @@ public class GetProductByCategoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse respose) throws ServletException, IOException {
         ArrayList<Product> products = null;
-        ProductDAO productDAO =new ProductDAO();
+        ProductDAO productDAO = new ProductDAO();
         String name;
-        if(productDAO.connect()){
-            name=(String) request.getAttribute("categoryName");
+        if (productDAO.connect()) {
+            name = (String) request.getAttribute("categoryName");
             products = productDAO.getProductByCategory(name);
             request.setAttribute("productListByCategory", products);
             productDAO.disconnect();
             //dispatcher
         }
     }
-    
-    
-    
+
 }

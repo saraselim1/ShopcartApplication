@@ -1,4 +1,4 @@
-package controller;
+package controller.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,19 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 import model.DAO.AdminDAO;
 import model.DAO.DBConnection;
 
-@WebServlet(name = "DeleteAdminServlet", urlPatterns = {"/DeleteAdminServlet"})
-public class DeleteAdminServlet extends HttpServlet {
+@WebServlet(name = "AddAdminServlet", urlPatterns = {"/AddAdminServlet"})
+public class AddAdminServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        int id = Integer.parseInt(request.getParameter(""));
-
+        String name = request.getParameter("");
+        String email = request.getParameter("");
         AdminDAO adminDAO = new AdminDAO();
-
-        boolean result = adminDAO.deleteAdmin(id);
-
+        boolean result = adminDAO.addAdmin(name, email);
     }
 
     @Override

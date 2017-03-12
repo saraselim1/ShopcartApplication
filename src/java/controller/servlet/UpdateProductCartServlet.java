@@ -1,4 +1,4 @@
-package controller;
+package controller.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,27 +12,24 @@ import model.DAO.CartDAO;
 import model.DAO.CartProductDAO;
 import model.DAO.DBConnection;
 
-@WebServlet(name = "DeleteProductFromCartServlet", urlPatterns = {"/DeleteProductFromCartServlet"})
-public class DeleteProductFromCartServlet extends HttpServlet {
-    
-    
+@WebServlet(name = "UpdateProductCartServlet", urlPatterns = {"/UpdateProductCartServlet"})
+public class UpdateProductCartServlet extends HttpServlet {
 
-   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-       int cartId =  Integer.parseInt(request.getParameter(""));        
-       int productId =  Integer.parseInt(request.getParameter(""));  
-       
-       CartProductDAO cartProductDAO = new CartProductDAO();
-       
-       boolean result = cartProductDAO.deleteProductFromCart(cartId, productId);
-        
-       
+
+        int quantity = Integer.parseInt(request.getParameter(""));
+        int price = Integer.parseInt(request.getParameter(""));
+        int cartId = Integer.parseInt(request.getParameter(""));
+        int productId = Integer.parseInt(request.getParameter(""));
+
+        CartProductDAO cartProductDAO = new CartProductDAO();
+
+        boolean result = cartProductDAO.updateProductart(cartId, productId, quantity, price);
+
     }
 
-   
     @Override
     public String getServletInfo() {
         return "Short description";

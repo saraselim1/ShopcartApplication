@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.servlet;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -22,42 +22,42 @@ import org.apache.commons.beanutils.BeanUtils;
  * @author Pc
  */
 public class UpdateProductServlet extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Product product =new Product();
-        ProductDAO productDAO =new ProductDAO();
-        try{
-            BeanUtils.populate(product,request.getParameterMap());
-            if(productDAO.connect()){
+        Product product = new Product();
+        ProductDAO productDAO = new ProductDAO();
+        try {
+            BeanUtils.populate(product, request.getParameterMap());
+            if (productDAO.connect()) {
                 productDAO.updateProduct(product);
             }
-                  
-        }   catch (IllegalAccessException ex) {
+
+        } catch (IllegalAccessException ex) {
             Logger.getLogger(AddProductSevlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvocationTargetException ex) {
             Logger.getLogger(AddProductSevlet.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally {
             productDAO.disconnect();
         }
-       
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Product product =new Product();
-        ProductDAO productDAO =new ProductDAO();
-        try{
-            BeanUtils.populate(product,request.getParameterMap());
-            if(productDAO.connect()){
+        Product product = new Product();
+        ProductDAO productDAO = new ProductDAO();
+        try {
+            BeanUtils.populate(product, request.getParameterMap());
+            if (productDAO.connect()) {
                 productDAO.updateProduct(product);
             }
-                  
-        }   catch (IllegalAccessException ex) {
+
+        } catch (IllegalAccessException ex) {
             Logger.getLogger(AddProductSevlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvocationTargetException ex) {
             Logger.getLogger(AddProductSevlet.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally {
             productDAO.disconnect();
         }
     }

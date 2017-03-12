@@ -1,4 +1,4 @@
-package controller;
+package controller.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,30 +8,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.DAO.AdminDAO;
-import model.DAO.CartDAO;
 import model.DAO.DBConnection;
 
-@WebServlet(name = "AddCartServlet", urlPatterns = {"/AddCartServlet"})
-public class AddCartServlet extends HttpServlet {
-    
-    
+@WebServlet(name = "UpdateAdminServlet", urlPatterns = {"/UpdateAdminServlet"})
+public class UpdateAdminServlet extends HttpServlet {
 
-   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-       int money =  Integer.parseInt(request.getParameter(""));
-       int userid =  Integer.parseInt(request.getParameter(""));
-       
-        CartDAO cartDAO = new CartDAO();
-        
-        boolean result = cartDAO.addAcart(money, userid);
-        
-        
+
+        int id = Integer.parseInt(request.getParameter(""));
+        String name = request.getParameter("");
+        String email = request.getParameter("");
+
+        AdminDAO adminDAO = new AdminDAO();
+
+        boolean result = adminDAO.updateAdmin(id, name, email);
+
     }
 
-   
     @Override
     public String getServletInfo() {
         return "Short description";

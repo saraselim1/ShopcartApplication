@@ -1,4 +1,4 @@
-package controller;
+package controller.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,11 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.DAO.AdminDAO;
 import model.DAO.CartDAO;
-import model.DAO.CartProductDAO;
 import model.DAO.DBConnection;
 
-@WebServlet(name = "UpdateProductCartServlet", urlPatterns = {"/UpdateProductCartServlet"})
-public class UpdateProductCartServlet extends HttpServlet {
+@WebServlet(name = "UpdateCartMoney", urlPatterns = {"/UpdateCartMoney"})
+public class UpdateCartMoney extends HttpServlet {
     
     
 
@@ -22,16 +21,14 @@ public class UpdateProductCartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-       int quantity =  Integer.parseInt(request.getParameter(""));        
-       int price =  Integer.parseInt(request.getParameter(""));        
-       int cartId =  Integer.parseInt(request.getParameter(""));        
-       int productId =  Integer.parseInt(request.getParameter(""));  
+       int money =  Integer.parseInt(request.getParameter(""));
+       int userid =  Integer.parseInt(request.getParameter(""));
        
-       CartProductDAO cartProductDAO = new CartProductDAO();
-       
-       boolean result = cartProductDAO.updateProductart(cartId, productId, quantity, price);
+        CartDAO cartDAO = new CartDAO();
         
-       
+        boolean result = cartDAO.updateCartMoney(userid, money);
+        
+        
     }
 
    

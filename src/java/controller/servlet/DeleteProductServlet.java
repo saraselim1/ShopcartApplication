@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.servlet;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -23,41 +23,40 @@ import org.apache.commons.beanutils.BeanUtils;
  */
 public class DeleteProductServlet extends HttpServlet {
 
-   @Override
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ProductDAO productDAO =new ProductDAO();
+        ProductDAO productDAO = new ProductDAO();
         String name;
-        try{
-            if(productDAO.connect()){
-                name=(String) request.getAttribute("productName");
+        try {
+            if (productDAO.connect()) {
+                name = (String) request.getAttribute("productName");
                 productDAO.deleteProduct(name);
             }
-                  
-        }catch (Exception ex) {
+
+        } catch (Exception ex) {
             Logger.getLogger(AddProductSevlet.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally {
             productDAO.disconnect();
         }
-       
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ProductDAO productDAO =new ProductDAO();
+        ProductDAO productDAO = new ProductDAO();
         String name;
-        try{
-            if(productDAO.connect()){
-                name=(String) request.getAttribute("productName");
+        try {
+            if (productDAO.connect()) {
+                name = (String) request.getAttribute("productName");
                 productDAO.deleteProduct(name);
             }
-                  
-        }catch (Exception ex) {
+
+        } catch (Exception ex) {
             Logger.getLogger(AddProductSevlet.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally {
             productDAO.disconnect();
         }
-    
+
     }
-    
-    
+
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,10 +23,10 @@ public class GetProductByNameServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Product product;
-        ProductDAO productDAO =new ProductDAO();
+        ProductDAO productDAO = new ProductDAO();
         String name;
-        if(productDAO.connect()){
-            name=(String) request.getAttribute("productName");
+        if (productDAO.connect()) {
+            name = (String) request.getAttribute("productName");
             product = productDAO.getProductByName(name);
             request.setAttribute("productByName", product);
             productDAO.disconnect();
@@ -36,16 +36,16 @@ public class GetProductByNameServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         Product product;
-        ProductDAO productDAO =new ProductDAO();
+        Product product;
+        ProductDAO productDAO = new ProductDAO();
         String name;
-        if(productDAO.connect()){
-            name=(String) request.getAttribute("productName");
+        if (productDAO.connect()) {
+            name = (String) request.getAttribute("productName");
             product = productDAO.getProductByName(name);
             request.setAttribute("productByName", product);
             productDAO.disconnect();
             //dispatcher
         }
     }
-    
+
 }

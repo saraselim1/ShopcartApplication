@@ -1,4 +1,4 @@
-package controller;
+package controller.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.DAO.AdminDAO;
+import model.DAO.CartDAO;
+import model.DAO.CartProductDAO;
 import model.DAO.DBConnection;
 
-@WebServlet(name = "AddAdminServlet", urlPatterns = {"/AddAdminServlet"})
-public class AddAdminServlet extends HttpServlet {
+@WebServlet(name = "DeleteProductFromCartServlet", urlPatterns = {"/DeleteProductFromCartServlet"})
+public class DeleteProductFromCartServlet extends HttpServlet {
     
     
 
@@ -20,14 +22,14 @@ public class AddAdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-       String name =  request.getParameter("");
-       String email =  request.getParameter("");
+       int cartId =  Integer.parseInt(request.getParameter(""));        
+       int productId =  Integer.parseInt(request.getParameter(""));  
        
-        AdminDAO adminDAO = new AdminDAO();
+       CartProductDAO cartProductDAO = new CartProductDAO();
+       
+       boolean result = cartProductDAO.deleteProductFromCart(cartId, productId);
         
-        boolean result = adminDAO.addAdmin(name, email);
-        
-        
+       
     }
 
    

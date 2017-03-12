@@ -1,4 +1,4 @@
-package controller;
+package controller.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.DAO.AdminDAO;
 import model.DAO.CartDAO;
+import model.DAO.CartProductDAO;
 import model.DAO.DBConnection;
 
-@WebServlet(name = "DeleteCartServlet", urlPatterns = {"/DeleteCartServlet"})
-public class DeleteCartServlet extends HttpServlet {
+@WebServlet(name = "AddProductToCartServlet", urlPatterns = {"/AddProductToCartServlet"})
+public class AddProductToCartServlet extends HttpServlet {
     
     
 
@@ -21,13 +22,16 @@ public class DeleteCartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-       int userid =  Integer.parseInt(request.getParameter(""));
+       int quantity =  Integer.parseInt(request.getParameter(""));        
+       int price =  Integer.parseInt(request.getParameter(""));        
+       int cartId =  Integer.parseInt(request.getParameter(""));        
+       int productId =  Integer.parseInt(request.getParameter(""));  
        
-        CartDAO cartDAO = new CartDAO();
+       CartProductDAO cartProductDAO = new CartProductDAO();
+       
+       boolean result = cartProductDAO.addProdcutToCart(quantity, price, cartId, productId);
         
-        boolean result = cartDAO.deleteCart(userid);
-        
-        
+       
     }
 
    
