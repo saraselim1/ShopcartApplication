@@ -22,7 +22,9 @@ import model.beans.Admin;
  *
  * @author Sara Selim
  */
-@WebFilter(filterName = "AdminFilter", servletNames = {""})
+@WebFilter(filterName = "AdminFilter", servletNames = {"AddCategoryServlet", "AddProductSevlet",
+    "UpdateCategoryServlet", "UpdateProductServlet",
+    "DeleteCategoryServlet", "DeleteProductServlet"})
 public class AdminFilter implements Filter {
 
     @Override
@@ -41,7 +43,8 @@ public class AdminFilter implements Filter {
         Admin admin = (Admin) session.getAttribute(adminName);
 
         if (session == null || admin == null) {
-            res.sendRedirect(req.getContextPath() + "/login.jsp");
+            // should be redirect to admin login page
+            //res.sendRedirect(req.getContextPath() + "/login.jsp");
         } else {
             chain.doFilter(request, response);
         }

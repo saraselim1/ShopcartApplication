@@ -23,25 +23,23 @@
             <web-resource-name>
                 SecuredAdminManpulaion
             </web-resource-name>
-            <url-pattern>
-                /AddAdminServlet
-            </url-pattern>
+            <url-pattern>/AddAdminServlet</url-pattern>
+            <url-pattern>/DeleteAdminServlet</url-pattern>
+            <url-pattern>/UpdateAdminServlet</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description>
-                Only super Admin can add anther normal admin
+                Only super Admin can add, delete and update info about anther normal admin
             </description>
-            <role-name>
-                superAdmin
-            </role-name>
+            <role-name>superAdmin</role-name>
         </auth-constraint>
     </security-constraint>
     <security-role>
         <role-name>superAdmin</role-name>
     </security-role>
     <login-config>
-        BASIC
-    </login-config>-->
+        <auth-method>BASIC</auth-method>
+    </login-config>
     <!-- sara End -->
     
     

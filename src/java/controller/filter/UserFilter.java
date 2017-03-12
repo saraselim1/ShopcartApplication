@@ -22,9 +22,9 @@ import model.beans.User;
  *
  * @author Sara Selim
  */
-@WebFilter(filterName = "UserProfile", servletNames = {"UpdateProductCartServlet", "UpdateCartMoney",
+@WebFilter(filterName = "UserProfile", servletNames = {"UpdateProductCartServlet", "UpdateCartMoney","UpdateProductCartServlet",
                                                        "DeleteProductFromCartServlet", "DeleteCartServlet",
-                                                       "AddProductToCartServlet"})
+                                                       "AddProductToCartServlet","AddCartServlet"})
 public class UserFilter implements Filter {
 
     @Override
@@ -38,7 +38,8 @@ public class UserFilter implements Filter {
         User user = (User) session.getAttribute(userName);
 
         if (session == null || user == null) {
-            res.sendRedirect(req.getContextPath() + "/login.jsp");
+            // should be redirect to user login page
+            //res.sendRedirect(req.getContextPath() + "/login.jsp");
         } else {
             chain.doFilter(request, response);
         }
