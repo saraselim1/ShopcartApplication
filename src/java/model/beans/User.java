@@ -31,6 +31,10 @@ public class User {
         this.gender = gender;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Cart getCart() {
         return cart;
     }

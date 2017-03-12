@@ -20,6 +20,7 @@ public class Order {
     private int totalPrice;
     private Timestamp date;
     private int userId;
+
     List<UserProduct> product;
 
     public List<UserProduct> getProduct() {

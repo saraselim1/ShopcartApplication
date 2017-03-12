@@ -28,7 +28,8 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(int amountOfMoney, int userId) {
+    public Cart(int id,int amountOfMoney, int userId) {
+        this.id = id;
         this.amountOfMoney = amountOfMoney;
         this.userId = userId;
     }
