@@ -55,7 +55,7 @@ public abstract class DBConnector {
         }
     }
 
-    protected boolean connect() {
+    public boolean connect() {
         try {
             connection = DriverManager.getConnection("jdbc:oracle:thin:@" + ipAddress + ":" + port + ":xe", dbUserName, dbPassword);
             connectionState = true;
@@ -65,7 +65,7 @@ public abstract class DBConnector {
         return connectionState;
     }
 
-    protected void disconnect() {
+    public void disconnect() {
         try {
             if (connectionState) {
                 connection.close();

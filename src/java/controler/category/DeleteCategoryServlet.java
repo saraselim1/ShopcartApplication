@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controler.category;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -13,50 +13,49 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.DAO.ProductDAO;
+import model.DAO.CategoryDAO;
 
 /**
  *
  * @author Pc
  */
-@WebServlet(name = "DeleteProductServlet", urlPatterns = {"/DeleteProductServlet"})
-public class DeleteProductServlet extends HttpServlet {
-
-   @Override
+@WebServlet(name = "DeleteCategoryServlet", urlPatterns = {"/DeleteProductServlet"})
+public class DeleteCategoryServlet extends HttpServlet{
+    
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ProductDAO productDAO =new ProductDAO();
+        CategoryDAO categoryDAO =new CategoryDAO();
         String name;
         try{
-            if(productDAO.connect()){
-                name=(String) request.getAttribute("productName");
-                productDAO.deleteProduct(name);
+            if(categoryDAO.connect()){
+                name=(String) request.getAttribute("categoryName");
+                categoryDAO.deleteCategory(name);
             }
                   
         }catch (Exception ex) {
-            Logger.getLogger(AddProductSevlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteCategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
-            productDAO.disconnect();
+            categoryDAO.disconnect();
         }
        
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ProductDAO productDAO =new ProductDAO();
+         CategoryDAO categoryDAO =new CategoryDAO();
         String name;
         try{
-            if(productDAO.connect()){
-                name=(String) request.getAttribute("productName");
-                productDAO.deleteProduct(name);
+            if(categoryDAO.connect()){
+                name=(String) request.getAttribute("categoryName");
+                categoryDAO.deleteCategory(name);
             }
                   
         }catch (Exception ex) {
-            Logger.getLogger(AddProductSevlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteCategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
-            productDAO.disconnect();
+            categoryDAO.disconnect();
         }
     
     }
-    
     
 }

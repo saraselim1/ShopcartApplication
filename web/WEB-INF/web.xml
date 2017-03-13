@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-         version="3.1">
-
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <!--  bothinah start -->
-    
     <!-- bothinah End -->
-    
     <!-- mohamed start -->
-    
     <!-- mohamed End -->
-    
     <!-- masoud start -->
-    
     <!-- masoud End -->
-    
     <!-- sara start -->
     <security-constraint>
         <web-resource-collection>
@@ -41,9 +30,78 @@
         <auth-method>BASIC</auth-method>
     </login-config>
     <!-- sara End -->
-    
-    
-    
+    <servlet>
+        <servlet-name>AllUsers</servlet-name>
+        <servlet-class>controller.user.GettingAllUsersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>User</servlet-name>
+        <servlet-class>controller.user.GettingOneUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserAdd</servlet-name>
+        <servlet-class>controller.user.AddingOneUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserUpdate</servlet-name>
+        <servlet-class>controller.user.UpdatingOneUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserDelete</servlet-name>
+        <servlet-class>controller.user.DeletingOneUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllOrders</servlet-name>
+        <servlet-class>controller.order.GettingAllOrdersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserOrders</servlet-name>
+        <servlet-class>controller.order.GettingOneUserOrdersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderAdd</servlet-name>
+        <servlet-class>controller.order.AddingOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDelete</servlet-name>
+        <servlet-class>controller.order.DeletengOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AllUsers</servlet-name>
+        <url-pattern>/AllUsers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>User</servlet-name>
+        <url-pattern>/User</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserAdd</servlet-name>
+        <url-pattern>/UserAdd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserUpdate</servlet-name>
+        <url-pattern>/UserUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDelete</servlet-name>
+        <url-pattern>/UserDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllOrders</servlet-name>
+        <url-pattern>/AllOrders</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserOrders</servlet-name>
+        <url-pattern>/UserOrders</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderAdd</servlet-name>
+        <url-pattern>/OrderAdd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDelete</servlet-name>
+        <url-pattern>/OrderDelete</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
