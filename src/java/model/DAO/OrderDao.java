@@ -6,15 +6,12 @@
 package model.DAO;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.beans.Order;
-import model.beans.Product;
-import model.beans.User;
 import model.beans.UserProduct;
 
 /**
