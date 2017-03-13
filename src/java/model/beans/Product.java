@@ -18,17 +18,19 @@ public class Product {
     private int offer;
     private int quantity;
     private int categoryId;
+    private String img;
 
     public Product() {
     }
 
-    public Product(String name, String description, int price, int offer, int quantity, int categoryId) {
+    public Product(String name, String description, int price, int offer, int quantity, int categoryId,String img) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.offer = offer;
         this.quantity = quantity;
         this.categoryId = categoryId;
+        this.img=img;
     }
 
     public String getName() {
@@ -85,4 +87,13 @@ public class Product {
     public void setId(int id) {
         this.id=id;
     }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+    
 }

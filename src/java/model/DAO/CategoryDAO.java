@@ -139,7 +139,7 @@ public class CategoryDAO {
      
      public Vector<Category> getAllCategorys(){
         Vector<Category> categorys = null;
-        Vector<Product> products =null;
+        Vector<Product> products =new Vector<Product>();;
         String productQuery;
         ResultSet productRs;
          try{

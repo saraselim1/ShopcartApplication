@@ -7,6 +7,7 @@ package controller.product;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Vector;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +25,7 @@ public class GetProductByCategoryServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Product> products = null;
+        Vector<Product> products = null;
         ProductDAO productDAO =new ProductDAO();
         String name;
         if(productDAO.connect()){
@@ -38,7 +39,7 @@ public class GetProductByCategoryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse respose) throws ServletException, IOException {
-        ArrayList<Product> products = null;
+        Vector<Product> products = null;
         ProductDAO productDAO =new ProductDAO();
         String name;
         if(productDAO.connect()){

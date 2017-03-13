@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.beans.Product;
@@ -144,10 +144,10 @@ public class ProductDAO {
               }
               return rows;
         }
-    public ArrayList<Product> getAllProducts(){
-        ArrayList<Product> products = null;
+    public Vector<Product> getAllProducts(){
+        Vector<Product> products = null;
          try{
-                products = new ArrayList<Product>();
+                products = new Vector<Product>();
                 query=new String("select * from product");
                 rs=stmt.executeQuery(query);
                     while (rs.next())
@@ -160,6 +160,7 @@ public class ProductDAO {
                         p.setOffer(rs.getInt("OFFER"));
                         p.setDescription(rs.getString("DESCRIPTION"));
                         p.setCategoryId(rs.getInt("CATEGORY_ID"));
+                        p.setImg(rs.getString("IMG"));
                         products.add(p);
                     }
                    
@@ -171,10 +172,10 @@ public class ProductDAO {
          return products;
     }
     
-    public ArrayList<Product> getProductByCategory(String name){
-        ArrayList<Product> products = null;
+    public Vector<Product> getProductByCategory(String name){
+        Vector<Product> products = null;
          try{
-                products = new ArrayList<Product>();
+                products = new Vector<Product>();
                 query=new String("select * from CATEGORY where NAME ='"+name+"'");
                 rs=stmt.executeQuery(query);
                 rs.next();
@@ -191,6 +192,7 @@ public class ProductDAO {
                         p.setOffer(rs.getInt("OFFER"));
                         p.setDescription(rs.getString("DESCRIPTION"));
                         p.setCategoryId(rs.getInt("CATEGORY_ID"));
+                        p.setImg(rs.getString("IMG"));
                         products.add(p);
                     }
                    
@@ -218,6 +220,7 @@ public class ProductDAO {
                         p.setOffer(rs.getInt("OFFER"));
                         p.setDescription(rs.getString("DESCRIPTION"));
                         p.setCategoryId(rs.getInt("CATEGORY_ID"));
+                        p.setImg(rs.getString("IMG"));
                     }
                    
                    

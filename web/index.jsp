@@ -8,7 +8,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <head>
+        <link href="assets/css/bootstrap.css" rel="stylesheet"/>
+        <link href="style.css" rel="stylesheet"/>
+	<link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet">
         <script src="jquery-1.9.1.min.js"></script>
         <script>
          
