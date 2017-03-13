@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Start Sara -->
         <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet" />
-        <link href="${pageContext.request.contextPath}/style.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}/assets/style.css" rel="stylesheet" />
         <link href="${pageContext.request.contextPath}/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
         <script src="${pageContext.request.contextPath}/assets/js/jquery.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/bootstrap.js"></script>
