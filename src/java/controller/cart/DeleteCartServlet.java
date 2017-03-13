@@ -1,4 +1,4 @@
-package controller;
+package controller.cart;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,8 +11,8 @@ import model.DAO.AdminDAO;
 import model.DAO.CartDAO;
 import model.DAO.DBConnection;
 
-@WebServlet(name = "UpdateCartMoney", urlPatterns = {"/UpdateCartMoney"})
-public class UpdateCartMoney extends HttpServlet {
+@WebServlet(name = "DeleteCartServlet", urlPatterns = {"/DeleteCartServlet"})
+public class DeleteCartServlet extends HttpServlet {
     
     
 
@@ -21,12 +21,11 @@ public class UpdateCartMoney extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-       int money =  Integer.parseInt(request.getParameter(""));
        int userid =  Integer.parseInt(request.getParameter(""));
        
         CartDAO cartDAO = new CartDAO();
         
-        boolean result = cartDAO.updateCartMoney(userid, money);
+        boolean result = cartDAO.deleteCart(userid);
         
         
     }

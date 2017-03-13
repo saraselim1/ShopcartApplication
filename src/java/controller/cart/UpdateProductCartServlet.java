@@ -1,4 +1,4 @@
-package controller;
+package controller.cart;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,8 +12,8 @@ import model.DAO.CartDAO;
 import model.DAO.CartProductDAO;
 import model.DAO.DBConnection;
 
-@WebServlet(name = "AddProductToCartServlet", urlPatterns = {"/AddProductToCartServlet"})
-public class AddProductToCartServlet extends HttpServlet {
+@WebServlet(name = "UpdateProductCartServlet", urlPatterns = {"/UpdateProductCartServlet"})
+public class UpdateProductCartServlet extends HttpServlet {
     
     
 
@@ -29,7 +29,7 @@ public class AddProductToCartServlet extends HttpServlet {
        
        CartProductDAO cartProductDAO = new CartProductDAO();
        
-       boolean result = cartProductDAO.addProdcutToCart(quantity, price, cartId, productId);
+       boolean result = cartProductDAO.updateProductart(cartId, productId, quantity, price);
         
        
     }
