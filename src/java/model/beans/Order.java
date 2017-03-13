@@ -5,6 +5,7 @@
  */
 package model.beans;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import javafx.scene.chart.PieChart;
@@ -17,12 +18,9 @@ public class Order {
 
     private int id;
     private int totalPrice;
-    private Date date;
+    private Timestamp date;
     private int userId;
 
-    public void setId(int id) {
-        this.id = id;
-    }
     List<UserProduct> product;
 
     public List<UserProduct> getProduct() {
@@ -36,7 +34,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(int id,int totalPrice, Date date, int userId) {
+    public Order(int id, int totalPrice, Timestamp date, int userId) {
         this.id = id;
         this.totalPrice = totalPrice;
         this.date = date;
@@ -51,11 +49,11 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
@@ -69,5 +67,9 @@ public class Order {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

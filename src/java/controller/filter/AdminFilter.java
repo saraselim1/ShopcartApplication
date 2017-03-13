@@ -16,16 +16,21 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.beans.User;
+import model.beans.Admin;
 
 /**
  *
  * @author Sara Selim
  */
-@WebFilter(filterName = "UserProfile", servletNames = {"UpdateProductCartServlet", "UpdateCartMoney","UpdateProductCartServlet",
-                                                       "DeleteProductFromCartServlet", "DeleteCartServlet",
-                                                       "AddProductToCartServlet","AddCartServlet"})
-public class UserFilter implements Filter {
+@WebFilter(filterName = "AdminFilter", servletNames = {"AddCategoryServlet", "AddProductSevlet",
+    "UpdateCategoryServlet", "UpdateProductServlet",
+    "DeleteCategoryServlet", "DeleteProductServlet"})
+public class AdminFilter implements Filter {
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -33,20 +38,17 @@ public class UserFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        String userName = request.getParameter("name");
+        String adminName = request.getParameter("name");
         HttpSession session = req.getSession(false);
-        User user = (User) session.getAttribute(userName);
+        Admin admin = (Admin) session.getAttribute(adminName);
 
-        if (session == null || user == null) {
-            // should be redirect to user login page
+        if (session == null || admin == null) {
+            // should be redirect to admin login page
             //res.sendRedirect(req.getContextPath() + "/login.jsp");
         } else {
             chain.doFilter(request, response);
         }
-    }
 
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
     }
 
     @Override

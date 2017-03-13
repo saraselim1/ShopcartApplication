@@ -6,8 +6,8 @@
 package model.DAO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.beans.User;
@@ -17,6 +17,9 @@ import model.beans.User;
  * @author Masoud
  */
 public class UserDao extends DBConnector {
+    
+    User user;
+    List<User> users;
 
     public UserDao() {
         select = "select * from users where user_name = ?";
@@ -25,12 +28,10 @@ public class UserDao extends DBConnector {
         delete = "delete from users where user_name = ?";
     }
 
-    User user;
-    Vector<User> users;
-
     public List<User> getAllUsers() {
         try {
             resultSet = getAll("users");
+            users = new ArrayList<>();
             while (resultSet.next()) {
                 user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
                 users.add(user);
