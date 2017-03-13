@@ -7,6 +7,7 @@ package model.beans;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  *
@@ -18,12 +19,12 @@ public class Category {
     private String name;
     private String description;
     private int productNum;
-    ArrayList<Product> products;
+    Vector<Product> products;
 
     public Category() {
     }
 
-    public Category(String name, String description, int productNum, ArrayList<Product> products) {
+    public Category(String name, String description, int productNum, Vector<Product> products) {
         this.name = name;
         this.description = description;
         this.productNum = productNum;
@@ -54,11 +55,11 @@ public class Category {
         this.productNum = productNum;
     }
 
-    public ArrayList<Product> getProducts() {
+    public Vector<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<Product> products) {
+    public void setProducts(Vector<Product> products) {
         this.products = products;
     }
 

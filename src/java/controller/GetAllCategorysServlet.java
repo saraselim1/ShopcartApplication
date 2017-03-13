@@ -5,8 +5,11 @@
  */
 package controller;
 
+import com.google.gson.Gson;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Vector;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +27,7 @@ public class GetAllCategorysServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Category> categorys = null;
+        Vector<Category> categorys = null;
         CategoryDAO categoryDAO =new CategoryDAO();
         if(categoryDAO.connect()){
             categorys = categoryDAO.getAllCategorys();
@@ -39,13 +42,18 @@ public class GetAllCategorysServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        
-        ArrayList<Category> categorys = null;
+        Vector<Category> categorys = null;
         CategoryDAO categoryDAO =new CategoryDAO();
         if(categoryDAO.connect()){
             categorys = categoryDAO.getAllCategorys();
             request.setAttribute("categoryList", categorys);
             categoryDAO.disconnect();
-            //dispatcher
+        response.setContentType("application/json");
+            System.out.println(categorys.size());
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
+        out.print(gson.toJson(categorys));
+        out.close();
         }
         
     

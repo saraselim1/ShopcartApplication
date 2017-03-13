@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.beans.Category;
@@ -136,13 +137,13 @@ public class CategoryDAO {
               return rows;
         }
      
-     public ArrayList<Category> getAllCategorys(){
-        ArrayList<Category> categorys = null;
-        ArrayList<Product> products =null;
+     public Vector<Category> getAllCategorys(){
+        Vector<Category> categorys = null;
+        Vector<Product> products =null;
         String productQuery;
         ResultSet productRs;
          try{
-                categorys = new ArrayList<Category>();
+                categorys = new Vector<Category>();
                 query=new String("select * from CATEGORY");
                 rs=stmt.executeQuery(query);
                 rs.beforeFirst();
@@ -154,18 +155,18 @@ public class CategoryDAO {
                         c.setName(rs.getString("NAME"));
                         c.setProductNum(rs.getInt("PRODUCT_NUM"));
                         productQuery = new String("select * from product where CATEGORY_ID="+c.getId());
-                        productRs=stmt.executeQuery(productQuery);
+                        productRs=connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE , ResultSet.CONCUR_READ_ONLY).executeQuery(productQuery);
                         productRs.beforeFirst();
                         while (productRs.next())
                         {   
                             Product p = new Product();
-                            p.setId(rs.getInt("ID"));
-                            p.setName(rs.getString("NAME"));
-                            p.setQuantity(rs.getInt("QUANTITY_IN_STOCK"));
-                            p.setPrice(rs.getInt("PRICE"));
-                            p.setOffer(rs.getInt("OFFER"));
-                            p.setDescription(rs.getString("DESCRIPTION"));
-                            p.setCategoryId(rs.getInt("CATEGORY_ID"));
+                            p.setId(productRs.getInt("ID"));
+                            p.setName(productRs.getString("NAME"));
+                            p.setQuantity(productRs.getInt("QUANTITY_IN_STOCK"));
+                            p.setPrice(productRs.getInt("PRICE"));
+                            p.setOffer(productRs.getInt("OFFER"));
+                            p.setDescription(productRs.getString("DESCRIPTION"));
+                            p.setCategoryId(productRs.getInt("CATEGORY_ID"));
                             products.add(p);
                         }
                         c.setProducts(products);
