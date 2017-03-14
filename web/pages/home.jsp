@@ -13,11 +13,20 @@
         <link href="${pageContext.request.contextPath}/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
         <script src="${pageContext.request.contextPath}/assets/js/jquery-1.9.1.min.js"></script>
         <script>
+           
+            var category;
              function requestCategoryList(){
-                $.ajax({url:'../GetAllCategorysServlet',type:'Post',contentType:'application/json',data:new Date().toString(),datatype:'json',success:function(data){console.log(data);console.log(data.length); $("#result").html("");for(i=0;i<data.length;i++){ $("#result").append("<li><a href=\"products.html\"><span class=\"icon-chevron-right\"></span>"+data[i].name+"</a></li>");}$("#result").append("<li style=\"border:0\"> &nbsp;</li><li> <a class=\"totalInCart\" href=\"cart.html\"><strong>Total Amount  <span class=\"badge badge-warning pull-right\" style=\"line-height:18px;\">$448.42</span></strong></a></li>");}});
+                $.ajax({url:'../GetAllCategorysServlet',type:'Post',contentType:'application/json',data:new Date().toString(),datatype:'json',success:function(data){console.log(data);console.log(data.length); $("#result").html("");for(i=0;i<data.length;i++){ $("#result").append("<li><a href=\"#\" id=\""+data[i].name+"\" onclick=\"requestProductListByCategory("+'id'+");\"><span class=\"icon-chevron-right\"></span>"+data[i].name+"</a></li>");}$("#result").append("<li style=\"border:0\"> &nbsp;</li><li> <a class=\"totalInCart\" href=\"cart.html\"><strong>Total Amount  <span class=\"badge badge-warning pull-right\" style=\"line-height:18px;\">$448.42</span></strong></a></li>");}});
             }
             function requestProductList(){
                 $.ajax({url:'../GetAllProductsServlet',type:'Post',contentType:'application/json',data:new Date().toString(),datatype:'json',success:function(product){console.log(product);console.log(product.length); $("#productListDiv").html("");$("#productListDiv").append("<h3>Our Products </h3>"); for(i=0;i<product.length;i++){ $("#productListDiv").append("<div class=\"row-fluid\"><ul class=\"thumbnails\"><li class=\"span4\"><div class=\"thumbnail\"><a href=\"product_details.html\" class=\"overlay\"></a><a class=\"zoomTool\" href=\"product_details.html\" title=\"add to cart\"><span class=\"icon-search\"></span> QUICK VIEW</a><a href=\"product_details.htm\"><img src=\"../assets/img/"+product[i].img+"\" alt=\"\"></a><div class=\"caption cntr\"><p>"+product[i].name+"</p><p><strong>"+product[i].price+"</strong></p><h4><a class=\"shopBtn\" href=\"#\" title=\"add to cart\"> Add to cart </a></h4><div class=\"actionList\"></div> <br class=\"clr\"></div></div></li></ul></div>");}}});
+                            
+                                                                                                                                                                                                                                                                                                                                                        
+            }
+            function requestProductListByCategory(name){
+                console.log(name);
+                myData=JSON.stringify("{categoryName:'"+name+"',date:'"+new Date().toString()+"'}");
+                $.ajax({url:'../SearchForProductByCategoryServlet?categoryName='+name+'&date='+new Date().toString(),type:'Post',contentType:myData,datatype:'json',success:function(product){console.log(product);console.log(product.length); $("#productListDiv").html("");$("#productListDiv").append("<h3>Our Products </h3>"); for(i=0;i<product.length;i++){ $("#productListDiv").append("<div class=\"row-fluid\"><ul class=\"thumbnails\"><li class=\"span4\"><div class=\"thumbnail\"><a href=\"product_details.html\" class=\"overlay\"></a><a class=\"zoomTool\" href=\"product_details.html\" title=\"add to cart\"><span class=\"icon-search\"></span> QUICK VIEW</a><a href=\"product_details.htm\"><img src=\"../assets/img/"+product[i].img+"\" alt=\"\"></a><div class=\"caption cntr\"><p>"+product[i].name+"</p><p><strong>"+product[i].price+"</strong></p><h4><a class=\"shopBtn\" href=\"#\" title=\"add to cart\"> Add to cart </a></h4><div class=\"actionList\"></div> <br class=\"clr\"></div></div></li></ul></div>");}}});
                             
                                                                                                                                                                                                                                                                                                                                                         
             }
@@ -25,6 +34,7 @@
                 
                 requestProductList();
                 requestCategoryList();
+                
             }
         </script>
     </head>
@@ -43,7 +53,8 @@
 				<a href="index.html"> <span class="icon-home"></span> Home</a> 
 				<a href="#"><span class="icon-user"></span> My Account</a> 
 				<a href="register.html"><span class="icon-edit"></span> Free Register </a> 
-				<a href="contact.html"><span class="icon-envelope"></span> Contact us</a>
+				<!--<a href="contact.html"><span class="icon-envelope"></span> Contact us</a>-->
+                                <a href="viewCart"><span class="icon-shopping-cart"></span> 2 Item(s) - <span class="badge badge-warning"> $448.42</span></a>
 			</div>
 		</div>
 	</div>

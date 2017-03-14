@@ -177,25 +177,33 @@ public class ProductDAO {
          try{
                 products = new Vector<Product>();
                 query=new String("select * from CATEGORY where NAME ='"+name+"'");
-                rs=stmt.executeQuery(query);
-                rs.next();
-                int categoryId = rs.getInt("ID");
+                //rs.absolute(1);
+                System.out.println(name);
+                ResultSet rs1=stmt.executeQuery(query);
+                System.out.println("out");
+                if(rs1 != null){
+                    System.out.println("inside");
+                rs1.beforeFirst();
+                rs1.next();
+                int categoryId = rs1.getInt("ID");
+                System.out.println(categoryId);
+                System.out.println(name);
                 query=new String("select * from product where CATEGORY_ID ="+categoryId);
-                rs=stmt.executeQuery(query);
-                    while (rs.next())
+                ResultSet resultSet=connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(query);
+                    while (resultSet.next())
                     {   
                         Product p = new Product();
-                        p.setId(rs.getInt("ID"));
-                        p.setName(rs.getString("NAME"));
-                        p.setQuantity(rs.getInt("QUANTITY_IN_STOCK"));
-                        p.setPrice(rs.getInt("PRICE"));
-                        p.setOffer(rs.getInt("OFFER"));
-                        p.setDescription(rs.getString("DESCRIPTION"));
-                        p.setCategoryId(rs.getInt("CATEGORY_ID"));
-                        p.setImg(rs.getString("IMG"));
+                        p.setId(resultSet.getInt("ID"));
+                        p.setName(resultSet.getString("NAME"));
+                        p.setQuantity(resultSet.getInt("QUANTITY_IN_STOCK"));
+                        p.setPrice(resultSet.getInt("PRICE"));
+                        p.setOffer(resultSet.getInt("OFFER"));
+                        p.setDescription(resultSet.getString("DESCRIPTION"));
+                        p.setCategoryId(resultSet.getInt("CATEGORY_ID"));
+                        p.setImg(resultSet.getString("IMG"));
                         products.add(p);
                     }
-                   
+                }   
                    
               }catch(SQLException ex)
               {
