@@ -40,8 +40,8 @@ public abstract class DBConnector {
     protected String delete;
 
     protected DBConnector() {
-        dbUserName = "dbuser";
-        dbPassword = "dbuser";
+        dbUserName = "servlet";
+        dbPassword = "servlet";
         ipAddress = "127.0.0.1";
         port = "1521";
 

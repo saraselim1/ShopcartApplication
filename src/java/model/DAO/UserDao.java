@@ -48,7 +48,8 @@ public class UserDao extends DBConnector {
             pStatement.setString(1, userName);
             resultSet = pStatement.executeQuery();
             if (resultSet.next()) {
-                user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
+                user = new User(resultSet.getInt(1), resultSet.getString(2), 
+                        resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);

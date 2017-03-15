@@ -12,6 +12,7 @@ import java.util.List;
  * @author Sara Selim
  */
 public class Cart {
+
     private int id;
     private int amountOfMoney;
     private int userId;
@@ -24,11 +25,15 @@ public class Cart {
     public void setProduct(List<UserProduct> product) {
         this.product = product;
     }
-    
+
+    public int getId() {
+        return id;
+    }
+
     public Cart() {
     }
 
-    public Cart(int id,int amountOfMoney, int userId) {
+    public Cart(int id, int amountOfMoney, int userId) {
         this.id = id;
         this.amountOfMoney = amountOfMoney;
         this.userId = userId;
@@ -53,5 +58,5 @@ public class Cart {
     public void setId(int id) {
         this.id = id;
     }
-    
+
 }
