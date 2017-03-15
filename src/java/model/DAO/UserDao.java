@@ -82,8 +82,8 @@ public class UserDao extends DBConnector {
             pStatement.setString(4, user.getEmail());
             pStatement.setString(5, user.getGender());
             pStatement.setString(6, user.getPassword());
-            pStatement.setString(5, user.getAddress());
-            pStatement.setString(8, userName);
+            pStatement.setString(7, user.getAddress());
+            pStatement.setString(8, user.getUserName());
             pStatement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);

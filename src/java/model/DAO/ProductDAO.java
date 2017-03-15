@@ -216,8 +216,8 @@ public class ProductDAO {
      public Product getProductByName(String name){
          Product p = new Product();
          try{
-                String nameLower= name.toLowerCase();
-                query=new String("select * from product where NAME ='"+nameLower+"'");
+               // String nameLower= name.toLowerCase();
+                query=new String("select * from product where name like '"+name+"'");
                 rs=stmt.executeQuery(query);
                     if(rs.next())
                     {   

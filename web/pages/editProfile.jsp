@@ -1,16 +1,17 @@
 <%-- 
-    Document   : profile
-    Created on : Mar 13, 2017, 3:41:03 PM
-    Author     : Sara Selim
+    Document   : editProfile
+    Created on : Mar 15, 2017, 2:14:42 PM
+    Author     : M_Mustafa
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-        <title>Profile</title>
+        <title>Edit Profile</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
         <style type="text/css">
@@ -58,7 +59,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
-                    <A href="EditProfileServlet" >Edit Profile</A>
+                    <A href="edit.html" >Edit Profile</A>
 
                     <A href="edit.html" >Logout</A>
                     <br>
@@ -68,7 +69,7 @@
 
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title">${user.userName}</h3>
+                            <h3  class="panel-title"><span id="userName"> ${user.userName} </span></h3>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -76,36 +77,44 @@
 
 
                                 <div class=" col-md-9 col-lg-9 "> 
+                                    <form action="UpdateUserDataServ" method="post">
                                     <table class="table table-user-information">
                                         <tbody>
                                             <tr>
                                                 <td>First Name</td>
-                                                <td>${user.fname}</td>
+                                                <td><input type="text" value="${user.fname}" name="fname"/></td>
                                             </tr>
                                             <tr>
                                                 <td>Last Name</td>
-                                                <td>${user.lname}</td>
+                                                <td><input type="text" value="${user.lname}" name="lname"/></td>
                                             </tr>
                                             <tr>
                                                 <td>Email</td>
-                                                <td><a href="#">${user.email}</a></td>
+                                                <td><input type="text" value="${user.email}" name="email"/></td>
                                             </tr>
                                             <tr>
                                                 <td>Address</td>
-                                                <td>${user.address}</td>
+                                                <td><input type="text" value="${user.address}" name="address"/></td>
                                             </tr>
 
                                             <tr>
                                                 <td>Gender</td>
-                                                <td>${user.gender}</td>
+                                                <td><select name="gender">
+                                                        <option>Male</option>
+                                                        <option>Female</option>
+                                                    </select></td>
                                             </tr>
                                             <tr>
                                                 <td>PassWord</td>
-                                                <td>***********</td>
+                                                <td><input type="password" value="${user.password}" name="password"/></td>
                                             </tr>
 
                                         </tbody>
                                     </table>
+                                            <center>
+                                                <input type="submit" value="Save" />
+                                            </center>
+                                        </form>
 
                                 </div>
                             </div>
