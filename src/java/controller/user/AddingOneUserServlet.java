@@ -29,6 +29,8 @@ public class AddingOneUserServlet extends HttpServlet {
         user.setFname(request.getParameter("fName"));
         user.setLname(request.getParameter("lName"));
         user.setGender(request.getParameter("gender"));
+        user.setPassword(request.getParameter("password"));
+        user.setAddress(request.getParameter("address"));
         
         UserDao dbConn = new UserDao();
         if(dbConn.connect()){

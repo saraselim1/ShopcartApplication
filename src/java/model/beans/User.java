@@ -17,18 +17,22 @@ public class User {
     private String lname;
     private String email;
     private String gender;
+    private String password;
+    private String address;
     private Cart cart;
 
     public User() {
     }
 
-    public User(int id, String userName, String fname, String lname, String email, String gender) {
+    public User(int id, String userName, String fname, String lname, String email, String gender, String password, String address) {
         this.id = id;
         this.userName = userName;
         this.fname = fname;
         this.lname = lname;
         this.email = email;
         this.gender = gender;
+        this.password = password;
+        this.address = address;
     }
 
     public void setId(int id) {
@@ -86,5 +90,23 @@ public class User {
     public int getId() {
         return id;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String passowrd) {
+        this.password = passowrd;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    
 
 }
