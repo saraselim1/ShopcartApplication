@@ -31,11 +31,11 @@ public class GetProductByNameServlet extends HttpServlet {
         ProductDAO productDAO =new ProductDAO();
         String name;
         if(productDAO.connect()){
-            name=(String) request.getParameter("productName");
+            name=(String) request.getParameter("myProductName");
             System.out.println(name);
             System.out.println("hello");
             product = productDAO.getProductByName(name);
-            request.setAttribute("productListByName", product);
+            request.setAttribute("productByName", product);
             productDAO.disconnect();
             //dispatcher
             response.setContentType("application/json");
@@ -56,11 +56,11 @@ public class GetProductByNameServlet extends HttpServlet {
         ProductDAO productDAO =new ProductDAO();
         String name;
         if(productDAO.connect()){
-            name=(String) request.getParameter("productName");
+            name=(String) request.getParameter("myProductName");
             System.out.println(name);
             System.out.println("hello");
             product = productDAO.getProductByName(name);
-            request.setAttribute("productListByName", product);
+            request.setAttribute("productByName", product);
             productDAO.disconnect();
             //dispatcher
             response.setContentType("application/json");

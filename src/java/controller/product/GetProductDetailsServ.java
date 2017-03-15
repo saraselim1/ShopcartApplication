@@ -31,8 +31,27 @@ public class GetProductDetailsServ extends HttpServlet {
         ProductDAO productDAO =new ProductDAO();
         String name;
         if(productDAO.connect()){
-            //name=(String) request.getAttribute("productName");
-            product = productDAO.getProductByName("Zamalek_T-shirt");
+            name=(String) request.getAttribute("productName");
+            product = productDAO.getProductByName(name);
+            request.setAttribute("product", product);
+            System.out.println(product.getName()+name+"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+            productDAO.disconnect();
+            
+            RequestDispatcher rd = request.getRequestDispatcher("${pageContext.request.contextPath}/pages/viewProduct.jsp");
+            rd.forward(request, response);
+            //dispatcher
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        Product product;
+        ProductDAO productDAO =new ProductDAO();
+        String name;
+        if(productDAO.connect()){
+            name=(String) request.getAttribute("productName");
+            product = productDAO.getProductByName(name);
             request.setAttribute("product", product);
             System.out.println(product.getName()+"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
             productDAO.disconnect();
@@ -42,6 +61,4 @@ public class GetProductDetailsServ extends HttpServlet {
             //dispatcher
         }
     }
-
-
 }
