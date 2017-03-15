@@ -178,8 +178,8 @@ public class ProductDAO {
                 products = new Vector<Product>();
                 query=new String("select * from CATEGORY where NAME ='"+name+"'");
                 //rs.absolute(1);
-                System.out.println(name);
-                ResultSet rs1=stmt.executeQuery(query);
+                //System.out.println(name);
+                ResultSet rs1=connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(query);
                 System.out.println("out");
                 if(rs1 != null){
                     System.out.println("inside");

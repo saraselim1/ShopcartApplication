@@ -24,9 +24,18 @@
                                                                                                                                                                                                                                                                                                                                                         
             }
             function requestProductListByCategory(name){
-                console.log(name);
+                //console.log(name);
                 myData=JSON.stringify("{categoryName:'"+name+"',date:'"+new Date().toString()+"'}");
                 $.ajax({url:'../SearchForProductByCategoryServlet?categoryName='+name+'&date='+new Date().toString(),type:'Post',contentType:myData,datatype:'json',success:function(product){console.log(product);console.log(product.length); $("#productListDiv").html("");$("#productListDiv").append("<h3>Our Products </h3>"); for(i=0;i<product.length;i++){ $("#productListDiv").append("<div class=\"row-fluid\"><ul class=\"thumbnails\"><li class=\"span4\"><div class=\"thumbnail\"><a href=\"product_details.html\" class=\"overlay\"></a><a class=\"zoomTool\" href=\"product_details.html\" title=\"add to cart\"><span class=\"icon-search\"></span> QUICK VIEW</a><a href=\"product_details.htm\"><img src=\"../assets/img/"+product[i].img+"\" alt=\"\"></a><div class=\"caption cntr\"><p>"+product[i].name+"</p><p><strong>"+product[i].price+"</strong></p><h4><a class=\"shopBtn\" href=\"#\" title=\"add to cart\"> Add to cart </a></h4><div class=\"actionList\"></div> <br class=\"clr\"></div></div></li></ul></div>");}}});
+                            
+                                                                                                                                                                                                                                                                                                                                                        
+            }
+            function requestProductListByName(){
+                //console.log(name);
+                name = $('#searchText').val();
+                console.log(name);
+                myList=JSON.stringify("{categoryName:'"+name+"',date:'"+new Date().toString()+"'}");
+                $.ajax({url:'../SerchProductByNameServlet?productName='+name+'&date='+new Date().toString(),type:'Post',contentType:myList,datatype:'json',success:function(product){console.log(product);$("#productListDiv").html("");$("#productListDiv").append("<h3>Our Products </h3>");if(product.categoryId!==0){$("#productListDiv").append("<div class=\"row-fluid\"><ul class=\"thumbnails\"><li class=\"span4\"><div class=\"thumbnail\"><a href=\"product_details.html\" class=\"overlay\"></a><a class=\"zoomTool\" href=\"product_details.html\" title=\"add to cart\"><span class=\"icon-search\"></span> QUICK VIEW</a><a href=\"product_details.htm\"><img src=\"../assets/img/"+product.img+"\" alt=\"\"></a><div class=\"caption cntr\"><p>"+product.name+"</p><p><strong>"+product.price+"</strong></p><h4><a class=\"shopBtn\" href=\"#\" title=\"add to cart\"> Add to cart </a></h4><div class=\"actionList\"></div> <br class=\"clr\"></div></div></li></ul></div>");}else{$("#productListDiv").append("<div class=\"row-fluid\"><ul class=\"thumbnails\">No Such Product</div>");}}});
                             
                                                                                                                                                                                                                                                                                                                                                         
             }
@@ -101,8 +110,8 @@ Navigation Bar Section
 			  <li class="active"><a href="index.html">Home	</a></li>
 			</ul>
 			<form action="#" class="navbar-search pull-left">
-			  <input type="text" placeholder="Search" class="search-query span2">
-                          <button type="button" onclick="" class="add-on"><i class="icon-search"></i></button>
+			  <input id="searchText" type="text" placeholder="Search" class="search-query span2">
+                          <button type="button" onclick="requestProductListByName()" class="add-on"><i class="icon-search"></i></button>
 			</form>
 			<ul class="nav pull-right">
 			<li class="dropdown">

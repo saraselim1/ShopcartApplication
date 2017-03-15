@@ -5,8 +5,11 @@
  */
 package controller.product;
 
+import com.google.gson.Gson;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Vector;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,34 +22,53 @@ import model.beans.Product;
  *
  * @author Pc
  */
-@WebServlet(name = "GetProductByNameServlet", urlPatterns = {"/GetProductByNameServlet"})
+@WebServlet(name = "GetProductByNameServlet", urlPatterns = {"/SerchProductByNameServlet"})
 public class GetProductByNameServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Product product;
+        Product product = null;
         ProductDAO productDAO =new ProductDAO();
         String name;
         if(productDAO.connect()){
-            name=(String) request.getAttribute("productName");
+            name=(String) request.getParameter("productName");
+            System.out.println(name);
+            System.out.println("hello");
             product = productDAO.getProductByName(name);
-            request.setAttribute("productByName", product);
+            request.setAttribute("productListByName", product);
             productDAO.disconnect();
             //dispatcher
+            response.setContentType("application/json");
+            //System.out.println(products.size());
+            PrintWriter out = response.getWriter();
+            Gson gson = new Gson();
+            out.print(gson.toJson(product));
+            out.close();
         }
+        
+        
+       
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         Product product;
+        Product product = null;
         ProductDAO productDAO =new ProductDAO();
         String name;
         if(productDAO.connect()){
-            name=(String) request.getAttribute("productName");
+            name=(String) request.getParameter("productName");
+            System.out.println(name);
+            System.out.println("hello");
             product = productDAO.getProductByName(name);
-            request.setAttribute("productByName", product);
+            request.setAttribute("productListByName", product);
             productDAO.disconnect();
             //dispatcher
+            response.setContentType("application/json");
+            //System.out.println(products.size());
+            PrintWriter out = response.getWriter();
+            Gson gson = new Gson();
+            out.print(gson.toJson(product));
+            out.close();
         }
     }
     
