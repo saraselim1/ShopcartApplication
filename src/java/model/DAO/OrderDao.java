@@ -66,7 +66,24 @@ public class OrderDao extends DBConnector {
         }
         return orders;
     }
-    
+
+    public int getLastOrderId() {
+
+        try {
+            runQuery("select id from orders");
+            resultSet = pStatement.executeQuery();
+            if (resultSet.last()) {
+
+                int id = resultSet.getInt(1);
+
+                return id;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
     public List<Order> getUserOrders(int userID) {
         runQuery(select);
         try {
@@ -96,7 +113,7 @@ public class OrderDao extends DBConnector {
         }
         return orders;
     }
-    
+
     public void addOrder(Order order) {
         try {
             runQuery(insert);
@@ -104,13 +121,13 @@ public class OrderDao extends DBConnector {
             pStatement.setTimestamp(2, order.getDate());
             pStatement.setInt(3, order.getUserId());
             pStatement.executeUpdate();
+            int orderId = getLastOrderId();
             products = order.getProduct();
-            for (Iterator<UserProduct> it = products.iterator(); it.hasNext();) {
-                UserProduct pro = it.next();
+            for (UserProduct pro : products) {
                 runQuery(insertEx);
                 pStatement.setInt(1, pro.getQuantity());
                 pStatement.setInt(2, pro.getPrice());
-                pStatement.setInt(3, order.getId());
+                pStatement.setInt(3, orderId);
                 pStatement.setInt(4, pro.getProductId());
                 pStatement.executeUpdate();
             }
@@ -119,8 +136,8 @@ public class OrderDao extends DBConnector {
         }
 
     }
-    
-     public void deleteOrder(int id) {
+
+    public void deleteOrder(int id) {
         try {
             runQuery(delete);
             pStatement.setInt(1, id);

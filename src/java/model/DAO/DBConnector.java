@@ -27,10 +27,10 @@ public abstract class DBConnector {
     private final String port;
 
     private boolean connectionState;
-    
+
     private Driver driver;
     private Connection connection;
-    
+
     protected Statement statement;
     protected PreparedStatement pStatement;
     protected ResultSet resultSet;
@@ -38,6 +38,7 @@ public abstract class DBConnector {
     protected String insert;
     protected String update;
     protected String delete;
+    protected String selectAll;
 
     protected DBConnector() {
         dbUserName = "dbuser";
@@ -86,10 +87,10 @@ public abstract class DBConnector {
         }
         return null;
     }
-    
-    protected void runQuery(String query){
+
+    protected void runQuery(String query) {
         try {
-            pStatement = connection.prepareStatement(query);
+                pStatement = connection.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         } catch (SQLException ex) {
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
