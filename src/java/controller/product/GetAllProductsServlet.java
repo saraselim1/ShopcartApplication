@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +32,8 @@ public class GetAllProductsServlet extends HttpServlet {
         if(productDAO.connect()){
             products = productDAO.getAllProducts();
             request.setAttribute("productList", products);
+            ServletContext context = request.getSession().getServletContext();
+            context.setAttribute("productList", products);
             productDAO.disconnect();
             //dispatcher
             response.setContentType("application/json");
@@ -52,6 +55,8 @@ public class GetAllProductsServlet extends HttpServlet {
         if(productDAO.connect()){
             products = productDAO.getAllProducts();
             request.setAttribute("productList", products);
+            ServletContext context = request.getSession().getServletContext();
+            context.setAttribute("productList", products);
             productDAO.disconnect();
             //dispatcher
             response.setContentType("application/json");
