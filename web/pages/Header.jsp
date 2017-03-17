@@ -21,7 +21,7 @@
         <!--End Sara-->
 
         <script>
-            /*$(document).ready(function () {
+            $(document).ready(function () {
                 $('#searchArea').hide();
                 var url = window.location.href;
                 console.log(url);
@@ -30,7 +30,7 @@
                 } else {
                     $('#searchArea').hide();
                 }
-            });*/
+            });
             function requestProductListByName() {
                 //console.log(name);
                 name = $('#searchText').val();
