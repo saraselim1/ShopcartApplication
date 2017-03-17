@@ -31,17 +31,47 @@ public class GetProductDetailsServ extends HttpServlet {
         ProductDAO productDAO =new ProductDAO();
         String name;
         if(productDAO.connect()){
-            //name=(String) request.getAttribute("productName");
-            product = productDAO.getProductByName("Zamalek_T-shirt");
+            name=(String) request.getParameter("productName");
+            product = productDAO.getProductByName(name);
             request.setAttribute("product", product);
-            System.out.println(product.getName()+"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+            System.out.println(product.getName()+name+"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
             productDAO.disconnect();
             
-            RequestDispatcher rd = request.getRequestDispatcher("pages/viewProduct.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("${pageContext.request.contextPath}/pages/viewProduct.jsp");
             rd.forward(request, response);
             //dispatcher
         }
     }
 
-
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        Product product=null;
+        ProductDAO productDAO =new ProductDAO();
+        String name;
+        if(productDAO.connect()){
+            if(productDAO.connect()){
+                name=(String) request.getParameter("productName");
+                product = productDAO.getProductByName(name);
+                
+                //request.setAttribute("name", product.getName());
+                System.out.println(name+"post&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+                productDAO.disconnect();
+            }
+            request.setAttribute("name",product.getName());
+            request.setAttribute("price",product.getPrice());
+            request.setAttribute("description",product.getDescription());
+            request.setAttribute("categoryId",product.getCategoryId());
+            request.setAttribute("id",product.getId());
+            request.setAttribute("offer",product.getOffer());
+            request.setAttribute("quantity",product.getQuantity());
+            request.setAttribute("imgMaster",product.getImgMaster());
+            request.setAttribute("img1",product.getImg1());
+            request.setAttribute("img2",product.getImg2());
+            request.setAttribute("img3",product.getImg3());
+            RequestDispatcher rd = request.getRequestDispatcher("pages/viewProduct.jsp");
+            rd.forward(request, response);
+            //dispatcher
+        }
+    }
 }

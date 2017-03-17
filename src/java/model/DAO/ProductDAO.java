@@ -160,7 +160,7 @@ public class ProductDAO {
                         p.setOffer(rs.getInt("OFFER"));
                         p.setDescription(rs.getString("DESCRIPTION"));
                         p.setCategoryId(rs.getInt("CATEGORY_ID"));
-                        p.setImg(rs.getString("IMG"));
+                        p.setImgMaster(rs.getString("IMG"));
                         products.add(p);
                     }
                    
@@ -178,8 +178,8 @@ public class ProductDAO {
                 products = new Vector<Product>();
                 query=new String("select * from CATEGORY where NAME ='"+name+"'");
                 //rs.absolute(1);
-                System.out.println(name);
-                ResultSet rs1=stmt.executeQuery(query);
+                //System.out.println(name);
+                ResultSet rs1=connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(query);
                 System.out.println("out");
                 if(rs1 != null){
                     System.out.println("inside");
@@ -200,7 +200,7 @@ public class ProductDAO {
                         p.setOffer(resultSet.getInt("OFFER"));
                         p.setDescription(resultSet.getString("DESCRIPTION"));
                         p.setCategoryId(resultSet.getInt("CATEGORY_ID"));
-                        p.setImg(resultSet.getString("IMG"));
+                        p.setImgMaster(resultSet.getString("IMG"));
                         products.add(p);
                     }
                 }   
@@ -217,10 +217,13 @@ public class ProductDAO {
          Product p = new Product();
          try{
                // String nameLower= name.toLowerCase();
-                query=new String("select * from product where name like '"+name+"'");
+                query=new String("select * from product where name = '"+name+"'");
                 rs=stmt.executeQuery(query);
                     if(rs.next())
-                    {   
+                    {  
+                        String innerQuery = new String("select * from PRODUCT_IMAGES where PRODUCT_NAME = '"+name+"'");
+                        ResultSet resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(innerQuery);
+                        resultSet.next();
                         p.setId(rs.getInt("ID"));
                         p.setName(rs.getString("NAME"));
                         p.setQuantity(rs.getInt("QUANTITY_IN_STOCK"));
@@ -228,7 +231,12 @@ public class ProductDAO {
                         p.setOffer(rs.getInt("OFFER"));
                         p.setDescription(rs.getString("DESCRIPTION"));
                         p.setCategoryId(rs.getInt("CATEGORY_ID"));
-                        p.setImg(rs.getString("IMG"));
+                        p.setImgMaster(rs.getString("IMG"));
+                        if(resultSet != null){
+                            p.setImg1(resultSet.getString("IMG1"));
+                            p.setImg2(resultSet.getString("IMG2"));
+                            p.setImg3(resultSet.getString("IMG3"));
+                        }
                     }
                    
                    
@@ -238,6 +246,7 @@ public class ProductDAO {
               }
          return p;
     }
+   
      
      
 }
