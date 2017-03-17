@@ -6,11 +6,14 @@
 package controller.order;
 
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.DAO.OrderDao;
+import model.beans.User;
 
 /**
  *
@@ -19,13 +22,17 @@ import model.DAO.OrderDao;
 public class GettingOneUserOrdersServlet extends HttpServlet {
     
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         OrderDao dbConn = new OrderDao();
         if(dbConn.connect()){
-            request.setAttribute("userOrders", dbConn.getUserOrders((int) request.getAttribute("userName")));
-            dbConn.disconnect();
+            HttpSession session = request.getSession(false);
+            User user = (User) session.getAttribute("user");
+            user.setOrders(dbConn.getUserOrders(user.getId()));
+            RequestDispatcher rdView = getServletContext().getRequestDispatcher("/pages/viewOrders.jsp");
+            rdView.include(request, response);
+            
         }
     }
     

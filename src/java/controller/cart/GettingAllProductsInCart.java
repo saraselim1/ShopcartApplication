@@ -28,17 +28,10 @@ public class GettingAllProductsInCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CartDAO cartDao = new CartDAO();
         CartProductDAO cartProductDAO = new CartProductDAO();
-
-        HttpSession session = request.getSession();
-        User user = new User(1, "sara", "sara", "selim", "sara@mail.com", "f");
-
-//        HttpSession session = request.getSession(false);
-//        User user = (User) session.getAttribute(userName);
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("user");
         user.setCart(cartDao.getCartByUserId(user.getId()));
         user.getCart().setProduct(cartProductDAO.getAllProductInCart(user.getCart().getId()));
-//        RequestDispatcher rdHeader = getServletContext().getRequestDispatcher("/pages/Header.jsp");
-//        rdHeader.include(request, response);
-        session.setAttribute("user", user);
         RequestDispatcher rdView = getServletContext().getRequestDispatcher("/pages/viewCart.jsp");
         rdView.include(request, response);
     }

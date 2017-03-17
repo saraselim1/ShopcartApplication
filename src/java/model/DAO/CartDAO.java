@@ -10,26 +10,18 @@ import model.beans.Cart;
 public class CartDAO {
 
     public boolean addAcart(int money, int userid) {
-
         boolean result = false;
-
         DBConnection db = new DBConnection();
         Connection con = db.getConnection();
-
         int rowsUpd = 0;
-
         try {
-
             PreparedStatement ps = con.prepareStatement("insert  into cart(AMOUNT_OF_MONEY, USERS_ID) values (? , ?)");
             ps.setInt(1, money);
             ps.setInt(2, userid);
-
             rowsUpd = ps.executeUpdate();
-
             if (rowsUpd > 0) {
                 result = true;
             }
-
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -39,7 +31,6 @@ public class CartDAO {
                 ex.printStackTrace();
             }
         }
-
         return result;
     }
 

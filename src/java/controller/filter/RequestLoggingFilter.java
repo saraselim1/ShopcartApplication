@@ -6,9 +6,6 @@
 package controller.filter;
 
 import java.io.IOException;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -24,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Sara Selim
  */
-@WebFilter(filterName = "RequestLoggingFilter", urlPatterns = {"/login/*", "/signup/*"})
+@WebFilter(filterName = "UserProfile", servletNames = {"UserAdd"})
 public class RequestLoggingFilter implements Filter {
 
     @Override
@@ -39,7 +36,7 @@ public class RequestLoggingFilter implements Filter {
         HttpSession session = req.getSession(false);
         
         if (session != null) {
-            res.sendRedirect(req.getContextPath() + "index.html");
+            res.sendRedirect("Home");
         } else {
             chain.doFilter(request, response);
         }

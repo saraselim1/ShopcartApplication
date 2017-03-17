@@ -5,9 +5,12 @@
  */
 package controller.product;
 
+import com.google.gson.Gson;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.util.Vector;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,26 +22,35 @@ import model.beans.Product;
  *
  * @author Pc
  */
-@WebServlet(name = "GetProductByCategoryServlet", urlPatterns = {"/GetProductByCategoryServlet"})
-public class GetProductByCategoryServlet extends HttpServlet {
+@WebServlet(name = "SearchForProductByCategoryServlet", urlPatterns = {"/SearchForProductByCategoryServlet"})
+@MultipartConfig
+public class SearchForProductByCategoryServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Product> products = null;
+        Vector<Product> products = null;
         ProductDAO productDAO =new ProductDAO();
         String name;
         if(productDAO.connect()){
-            name=(String) request.getAttribute("categoryName");
+            name=(String) request.getParameter("categoryName");
+            System.out.println(name);
+            System.out.println("hello");
             products = productDAO.getProductByCategory(name);
             request.setAttribute("productListByCategory", products);
             productDAO.disconnect();
             //dispatcher
+            response.setContentType("application/json");
+            //System.out.println(products.size());
+            PrintWriter out = response.getWriter();
+            Gson gson = new Gson();
+            out.print(gson.toJson(products));
+            out.close();
         }
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse respose) throws ServletException, IOException {
-        ArrayList<Product> products = null;
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Vector<Product> products = null;
         ProductDAO productDAO =new ProductDAO();
         String name;
         if(productDAO.connect()){
@@ -47,6 +59,12 @@ public class GetProductByCategoryServlet extends HttpServlet {
             request.setAttribute("productListByCategory", products);
             productDAO.disconnect();
             //dispatcher
+            response.setContentType("application/json");
+            //System.out.println(products.size());
+            PrintWriter out = response.getWriter();
+            Gson gson = new Gson();
+            out.print(gson.toJson(products));
+            out.close();
         }
     }
     

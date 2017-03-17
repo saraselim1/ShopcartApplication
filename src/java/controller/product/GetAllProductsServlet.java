@@ -5,8 +5,10 @@
  */
 package controller.product;
 
+import com.google.gson.Gson;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.util.Vector;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,13 +26,19 @@ public class GetAllProductsServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Product> products = null;
+        Vector<Product> products = null;
         ProductDAO productDAO =new ProductDAO();
         if(productDAO.connect()){
             products = productDAO.getAllProducts();
             request.setAttribute("productList", products);
             productDAO.disconnect();
             //dispatcher
+            response.setContentType("application/json");
+            //System.out.println(products.size());
+            PrintWriter out = response.getWriter();
+            Gson gson = new Gson();
+            out.print(gson.toJson(products));
+            out.close();
         }
         
        
@@ -39,13 +47,19 @@ public class GetAllProductsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        
-        ArrayList<Product> products = null;
+        Vector<Product> products = null;
         ProductDAO productDAO =new ProductDAO();
         if(productDAO.connect()){
             products = productDAO.getAllProducts();
             request.setAttribute("productList", products);
             productDAO.disconnect();
             //dispatcher
+            response.setContentType("application/json");
+            //System.out.println(products.size());
+            PrintWriter out = response.getWriter();
+            Gson gson = new Gson();
+            out.print(gson.toJson(products));
+            out.close();
         }
         
     

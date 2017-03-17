@@ -24,7 +24,8 @@ import model.beans.User;
  */
 @WebFilter(filterName = "UserProfile", servletNames = {"UpdateProductCartServlet", "UpdateCartMoney","UpdateProductCartServlet",
                                                        "DeleteProductFromCartServlet", "DeleteCartServlet",
-                                                       "AddProductToCartServlet","AddCartServlet"})
+                                                       "AddProductToCartServlet","AddCartServlet",
+                                                       "GettingAllProductsInCart","UserOrders","BuyingServlet"})
 public class UserFilter implements Filter {
 
     @Override
@@ -38,8 +39,7 @@ public class UserFilter implements Filter {
         User user = (User) session.getAttribute(userName);
 
         if (session == null || user == null) {
-            // should be redirect to user login page
-            //res.sendRedirect(req.getContextPath() + "/login.jsp");
+            res.sendRedirect("Home");
         } else {
             chain.doFilter(request, response);
         }

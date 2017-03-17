@@ -7,38 +7,43 @@ package controller.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.DAO.CartDAO;
+import model.DAO.CartProductDAO;
 import model.DAO.UserDao;
+import model.beans.User;
 
 /**
  *
  * @author Masoud
  */
-@WebServlet(name = "SignInSevlet", urlPatterns = {"/SignInSevlet"})
 public class GettingOneUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-System.out.println("sdgjdsljgabljdgbaljdbglajgbvdvahjl");
-        
-        System.out.println("---------------------------------------------------------------------");
-        Enumeration<String> names = request.getParameterNames();
-        while (names.hasMoreElements()) {
-            System.out.println(names.nextElement());
-            System.out.println("*************************************");
-        }
-        //System.out.println("user  password" + request.getParameter("user"));
-        //System.out.println("user  password" + request.getParameter("password"));
 
+        String userName = request.getParameter("name");
+        String password = request.getParameter("password");
         UserDao dbConn = new UserDao();
         if (dbConn.connect()) {
-            request.setAttribute("User", dbConn.getUser(request.getParameter("userName")));
+            User user = dbConn.getUser(userName, password);
+            if (user != null) {
+                CartDAO cartDao = new CartDAO();
+                CartProductDAO cartProductDAO = new CartProductDAO();
+                user.setCart(cartDao.getCartByUserId(user.getId()));
+                user.getCart().setProduct(cartProductDAO.getAllProductInCart(user.getCart().getId()));
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                response.sendRedirect("Home");
+            } else {
+                PrintWriter out = response.getWriter();
+                out.println("not valiad");
+            }
             dbConn.disconnect();
         }
     }

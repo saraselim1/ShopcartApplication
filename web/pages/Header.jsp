@@ -14,30 +14,10 @@
         <script src="${pageContext.request.contextPath}/assets/js/jquery.scrollTo-1.4.3.1-min.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/shop.js"></script>
         <link rel="${pageContext.request.contextPath}/shortcut icon" href="assets/ico/favicon.ico">
-        
-        <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+
         <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
         <%@page contentType="text/html" pageEncoding="UTF-8"%>
-        
-        <script>
-            $(document).ready(function () {
-                $("#signInBtn").click(function () {
-                    var userNameValue = $("#inputEmail").val();
-                    var passwordValue = $("#inputPassword").val();
-                    var jsonData = {userName: userNameValue, pass: passwordValue};
-                    $.ajax({url: 'SignInSevlet?data=' new Date,
-                                type: 'POST',
-                        contentType: 'application/json',
-                        data: jsonData.toString(),
-                        dataType: 'json',
-                        success: function (data, textStatus, jqXHR) {
-                            console.log(data);
-                        }
-                    })
-                });
-            });
-        </script>
         <!--End Sara-->
     </head>
     <body>
@@ -46,41 +26,68 @@
             <div class="topNav">
                 <div class="container">
                     <div class="alignR">
-                        <a class="active" href="index.html"> <span class="icon-home"></span> Home</a> 
-                        <a href="#"><span class="icon-user"></span> My Account</a>
-                        <a href="register.html"><span class="icon-edit"></span> Free Register </a>
-                        <a href="GettingAllProductsInCart"><span class="icon-shopping-cart"></span> 2 Item(s) - <span class="badge badge-warning"> $448.42</span></a>
-                        <a href="UserOrders"><span class="icon-shopping-cart"></span> Orders </a>
+                        <a class="active" href="Home"> <span class="icon-home"></span> Home</a> 
+                        <c:if test="${sessionScope.user == null}" >
+                            <a href="UserAdd"><span class="icon-edit"></span> Free Register </a>
+                        </c:if>
+                        <c:if test="${sessionScope.user != null}" >
+                            <a href="#"><span class="icon-user"></span> My Account</a>
+                            <a href="GettingAllProductsInCart"><span class="icon-shopping-cart"></span>
+                                ${fn:length(sessionScope.user.cart.product)} items </a>
+                            <a href="UserOrders"><span class="icon-shopping-cart"></span> Orders </a>
+                        </c:if>
                     </div>
                 </div>
             </div>
         </div>
         <br><br><br>
         <div class="container">
+            <header id="header">
+                <div class="row">
+                    <div class="span4">
+                        <h1>
+                            <a class="logo" href="index.html"><span>Twitter Bootstrap ecommerce template</span> 
+                                <img src="assets/img/logo-bootstrap-shoping-cart.png" alt="bootstrap sexy shop">
+                            </a>
+                        </h1> </div>
+                </div>
+            </header>
             <div class="navbar">
                 <div class="navbar-inner">
                     <div class="container">
                         <div class="nav-collapse">
-                            <form action="#" class="navbar-search pull-left">
+                            <form class="navbar-search pull-left">
                                 <input type="text" placeholder="Search" class="search-query span2"> </form>
-                            <ul class="nav pull-right">
-                                <li class="dropdown"> <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                        <span class="icon-lock"></span> Login <b class="caret"></b></a>
-                                    <div class="dropdown-menu">
-                                        <form class="form-horizontal loginFrm">
-                                            <div class="control-group">
-                                                <input type="text" class="span2" id="inputEmail" placeholder="UserName"> </div>
-                                            <div class="control-group">
-                                                <input type="password" class="span2" id="inputPassword" placeholder="Password"> </div>
-                                            <div class="control-group">
-                                                <label class="checkbox">
-                                                    <input type="checkbox"> Remember me </label>
-                                                <button id="signInBtn" class="shopBtn btn-block">Sign in</button>
-                                        </form>
-                                    </div>
-                                    </div>
-                                </li>
-                            </ul>
+                                <c:if test="${sessionScope.user == null}" >
+                                <ul class="nav pull-right">
+                                    <li class="dropdown"> <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                            <span class="icon-lock"></span> Login <b class="caret"></b></a>
+                                        <div class="dropdown-menu">
+                                            <form method="POST" action="User" class="form-horizontal loginFrm">
+                                                <div class="control-group">
+                                                    <input type="text" class="span2" id="inputEmail" name="name" placeholder="UserName"> </div>
+                                                <div class="control-group">
+                                                    <input type="password" class="span2" id="inputPassword" name="password" placeholder="Password"> </div>
+                                                <div class="control-group">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox"> Remember me </label>
+                                                    <button id="signInBtn" type="submit" class="shopBtn btn-block">Sign in</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </c:if>
+                            <c:if test="${sessionScope.user != null}" >
+                                <ul class="nav pull-right">
+                                    <li class="dropdown"> <a href="">
+                                            <span class="icon-lock"></span> logout </a>
+
+                                        </div>
+                                    </li>
+                                </ul>
+                            </c:if>
                         </div>
                     </div>
                 </div>
