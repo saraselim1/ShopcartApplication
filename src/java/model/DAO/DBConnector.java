@@ -41,8 +41,8 @@ public abstract class DBConnector {
     protected String selectAll;
 
     protected DBConnector() {
-        dbUserName = "servlet";
-        dbPassword = "servlet";
+        dbUserName = "dbuser";
+        dbPassword = "dbuser";
         ipAddress = "127.0.0.1";
         port = "1521";
 

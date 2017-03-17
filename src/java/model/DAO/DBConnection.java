@@ -11,7 +11,7 @@ public class DBConnection {
         Connection con = null;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "servlet", "servlet");
+            con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "dbuser", "dbuser");
             System.out.println("SUCESSS");
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -19,10 +19,4 @@ public class DBConnection {
         
         return con;
     }
-    
-    public static void main(String[] args) {
-       new DBConnection().getConnection();
-    }
-    
-    
 }
