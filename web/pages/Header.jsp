@@ -14,7 +14,6 @@
         <script src="${pageContext.request.contextPath}/assets/js/jquery.scrollTo-1.4.3.1-min.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/shop.js"></script>
         <link rel="${pageContext.request.contextPath}/shortcut icon" href="assets/ico/favicon.ico">
-
         <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
         <%@page contentType="text/html" pageEncoding="UTF-8"%>
