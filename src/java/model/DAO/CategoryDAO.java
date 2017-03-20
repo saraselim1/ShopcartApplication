@@ -60,7 +60,7 @@ public class CategoryDAO {
         boolean exist=false;
         int rows=0;           
               try{
-                    query=new String("select * from product");
+                    query=new String("select * from category");
                     rs=stmt.executeQuery(query);
                     rs.beforeFirst();
                     while(rs.next())
