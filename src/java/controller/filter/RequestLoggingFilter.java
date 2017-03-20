@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.beans.User;
 
 /**
  *
@@ -32,13 +33,14 @@ public class RequestLoggingFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-
         HttpSession session = req.getSession(false);
-        
         if (session != null) {
-            res.sendRedirect("Home");
-        } else {
-            chain.doFilter(request, response);
+            User user = (User) session.getAttribute("user");
+            if (user != null) {
+                res.sendRedirect("Home");
+            } else {
+                chain.doFilter(request, response);
+            }
         }
     }
 

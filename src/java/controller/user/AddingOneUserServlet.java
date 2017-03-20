@@ -46,7 +46,7 @@ public class AddingOneUserServlet extends HttpServlet {
                     user2.setCart(cartDao.getCartByUserId(user.getId()));
                     HttpSession session = request.getSession();
                     session.setAttribute("user", user2);
-                    response.sendRedirect("Home");
+                    response.sendRedirect("pages/home.jsp");
                 } else {
                     PrintWriter out = response.getWriter();
                     out.println("not valiad");

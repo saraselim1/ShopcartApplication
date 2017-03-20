@@ -1,26 +1,31 @@
 
 <jsp:directive.include  file="Header.jsp"/>
 <script>
-    function updateItem(item){
-        console.log(item);
-        $.ajax({
-            url:"UpdateProductCartServlet",
-            type: 'POST',
-            contentType: 'application/json',
-            data: {price:item.price,quantity:item.quantity,cartId:cartID,productId:productId},
-            dataType: 'json'
-        });
+    function updateItem(productIDValue, priceValue) {
+        var newQuantity = $('#' + productIDValue).val();
+        $.post("UpdateProductCartServlet?date" + new Date(),
+                {
+                    quantity: newQuantity,
+                    price: priceValue,
+                    productId: productIDValue
+
+                },
+                function (data, status) {
+                    console.log(data);
+                });
     }
-    function deleteItem(cartId,productId){
-        console.log(item);
+    function deleteItem(productIdValue) {
         $.ajax({
-            url:"DeleteProductFromCartServlet",
+            url: "DeleteProductFromCartServlet?date" + new Date(),
             type: 'GET',
             contentType: 'application/json',
-            data: {cartId:cartID,productId:productId},
-            dataType: 'json'
+            data: {productId: productIdValue},
+            dataType: 'json',
+            success: function (data, textStatus, jqXHR) {
+                   $('#tr' + productIdValue).remove();         
+                        }
         });
-        
+
     }
 </script>
 <div class="container">
@@ -42,16 +47,18 @@
                     <tbody>
                         <c:set var="total" value="${0}"/>
                         <c:forEach items="${sessionScope.user.cart.product}" var="item">
-                            <tr >
-                                <td><img width="100" src="assets/img/e.jpg" alt=""></td>
-                                <td>Items name here<br>Carate : 22<br>Model : n/a</td>
+                            <c:set var="itemDetalias" 
+                                   value="${applicationScope.productList.stream().filter( ppp -> ppp.getId()==item.getProductId()).toList().get(0) }"/>
+                            <tr id="tr${item.productId}" >
+                                <td><img width="100" src="${ititemDetalias.imgMaster}" alt=""></td>
+                                <td>${itemDetalias.name}<br>${itemDetalias.description}</td>
                                 <td>${item.price}</td>
                                 <td>
                                     <input class="span1" style="max-width:40px" placeholder="1" 
-                                           id="appendedInputButtons" size="16" type="number" value="${item.quantity}">
+                                           id="${item.productId}" size="16" type="number" value="${item.quantity}">
                                     <div class="input-append">
-                                        <button onclick="updateItem(${item})" class="btn btn-mini btn-success" type="button"><span class="icon-ok"></span></button>
-                                        <button onclick="deleteItem(${sessionScope.user.cart.id},${item.productId})" class="btn btn-mini btn-danger" type="button"><span class="icon-remove"></span></button>
+                                        <button onclick="updateItem(${item.productId},${item.price})" class="btn btn-mini btn-success" type="button"><span class="icon-ok"></span></button>
+                                        <button onclick="deleteItem(${item.productId})" class="btn btn-mini btn-danger" type="button"><span class="icon-remove"></span></button>
                                     </div>
                                 </td>
                                 <td>${item.price * item.quantity}</td>

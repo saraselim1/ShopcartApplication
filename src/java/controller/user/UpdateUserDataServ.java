@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.DAO.UserDao;
 import model.beans.User;
 
@@ -27,27 +28,24 @@ public class UpdateUserDataServ extends HttpServlet {
         @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        User user = new User();
-        user.setUserName("mmustafa");   ///   session رجعه من
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("user");
+         
         user.setEmail(request.getParameter("email"));
         user.setFname(request.getParameter("fname"));
         user.setLname(request.getParameter("lname"));
         user.setGender(request.getParameter("gender"));
-        user.setAddress(request.getParameter("password"));
-        user.setPassword(request.getParameter("address"));
+        user.setAddress(request.getParameter("address"));
+        user.setPassword(request.getParameter("password"));
         
         UserDao dbConn = new UserDao();
         
         if(dbConn.connect()){
-            dbConn.updateUser("mmustafa", user);   /// get username from session   ....
+            dbConn.updateUser(user.getUserName(), user);   /// get username from session   ....
             dbConn.disconnect();
-            ///////////////////
             UserDao dbConnu = new UserDao();
             dbConnu.connect();
-            //request.setAttribute("user", dbConnu.getUser("mmustafa"));
             dbConnu.disconnect();
-            
             RequestDispatcher rd = request.getRequestDispatcher("pages/profile.jsp");
             rd.forward(request, response);
         }

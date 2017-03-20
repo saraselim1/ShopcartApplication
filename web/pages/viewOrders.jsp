@@ -3,6 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="span12">
+            <c:if test="${sessionScope.user.orders} > 0" >
             <c:forEach items="${sessionScope.user.orders}" var="order">
                 <div class="well well-small">
                     <h1><small class="pull-right">${fn:length(order.product)} Items with cost ${order.totalPrice} at ${order.date}  </small></h1>
@@ -30,6 +31,13 @@
                     <a href="/Home" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Continue Shopping </a>
                 </div>
             </c:forEach>
+            </c:if>
+            <c:if test="${sessionScope.user.orders == null}" >
+                <div class="well well-small">
+                    <h1>No Order</h1>
+                    <hr class="soften"/>	
+                </div>
+            </c:if>
         </div>
     </div>
 </div>

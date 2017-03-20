@@ -6,10 +6,6 @@
         <div id="sidebar" class="span3">
         </div>
         <div class="span9">
-            <ul class="breadcrumb">
-                <li><a href="index.html">Home</a> <span class="divider">/</span></li>
-                <li class="active">Registration</li>
-            </ul>
             <h3> Registration</h3>	
             <hr class="soft"/>
             <div class="well">

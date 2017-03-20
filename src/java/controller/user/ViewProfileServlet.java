@@ -29,10 +29,7 @@ public class ViewProfileServlet extends HttpServlet {
         
        UserDao dbConn = new UserDao();
         if(dbConn.connect()){
-            // request.getParameter("userName")
-            //request.setAttribute("user", dbConn.getUser("mmustafa"));
             dbConn.disconnect();
-            
             RequestDispatcher rd = request.getRequestDispatcher("pages/profile.jsp");
             rd.forward(request, response);
         }

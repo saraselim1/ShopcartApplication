@@ -50,9 +50,14 @@ public class UserDao extends DBConnector {
             pStatement.setString(2, password);
             resultSet = pStatement.executeQuery();
             if (resultSet.next()) {
-                user = new User(resultSet.getInt(1), resultSet.getString(2),
-                        resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6),
-                        resultSet.getString(7), resultSet.getString(8));
+                user = new User(resultSet.getInt(1), 
+                        resultSet.getString(2),
+                        resultSet.getString(3), 
+                        resultSet.getString(4), 
+                        resultSet.getString(5), 
+                        resultSet.getString(6),
+                        resultSet.getString("password"), 
+                        resultSet.getString("address"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);

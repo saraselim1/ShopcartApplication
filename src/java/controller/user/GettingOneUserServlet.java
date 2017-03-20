@@ -39,7 +39,7 @@ public class GettingOneUserServlet extends HttpServlet {
                 user.getCart().setProduct(cartProductDAO.getAllProductInCart(user.getCart().getId()));
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                response.sendRedirect("Home");
+                response.sendRedirect("pages/home.jsp");
             } else {
                 PrintWriter out = response.getWriter();
                 out.println("not valiad");

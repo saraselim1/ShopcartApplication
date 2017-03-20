@@ -22,7 +22,7 @@ import model.beans.User;
  *
  * @author Sara Selim
  */
-@WebFilter(filterName = "UserProfile", servletNames = {"UpdateProductCartServlet", "UpdateCartMoney","UpdateProductCartServlet",
+@WebFilter(filterName = "UserProfile", servletNames = {"UpdateProductCartServlet", "UpdateCartMoney","UpdateProductCartServlet","UpdateUserDataServ",
                                                        "DeleteProductFromCartServlet", "DeleteCartServlet",
                                                        "AddProductToCartServlet","AddCartServlet",
                                                        "GettingAllProductsInCart","UserOrders","BuyingServlet"})
@@ -38,7 +38,7 @@ public class UserFilter implements Filter {
         HttpSession session = req.getSession(false);
         User user = (User) session.getAttribute(userName);
 
-        if (session == null || user == null) {
+        if (session == null && user == null) {
             res.sendRedirect("Home");
         } else {
             chain.doFilter(request, response);

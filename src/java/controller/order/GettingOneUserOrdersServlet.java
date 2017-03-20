@@ -6,6 +6,7 @@
 package controller.order;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.DAO.OrderDao;
+import model.beans.Order;
 import model.beans.User;
 
 /**
@@ -29,10 +31,11 @@ public class GettingOneUserOrdersServlet extends HttpServlet {
         if(dbConn.connect()){
             HttpSession session = request.getSession(false);
             User user = (User) session.getAttribute("user");
-            user.setOrders(dbConn.getUserOrders(user.getId()));
+            List<Order> orders = dbConn.getUserOrders(user.getId());
+            user.setOrders(orders);
+            System.out.println("order size = "+orders.size());
             RequestDispatcher rdView = getServletContext().getRequestDispatcher("/pages/viewOrders.jsp");
             rdView.include(request, response);
-            
         }
     }
     
