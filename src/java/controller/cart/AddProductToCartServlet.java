@@ -14,7 +14,7 @@ import model.beans.User;
 public class AddProductToCartServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
@@ -22,8 +22,9 @@ public class AddProductToCartServlet extends HttpServlet {
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         int productId = Integer.parseInt(request.getParameter("productId"));
         int price = Integer.parseInt(request.getParameter("price"));
-
+         
         CartProductDAO cartProductDAO = new CartProductDAO();
         boolean result = cartProductDAO.addProdcutToCart(quantity, price, user.getCart().getId(), productId);
     }
+    
 }

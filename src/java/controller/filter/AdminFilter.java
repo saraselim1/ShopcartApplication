@@ -22,9 +22,9 @@ import model.beans.Admin;
  *
  * @author Sara Selim
  */
-@WebFilter(filterName = "AdminFilter", servletNames = {"AddCategoryServlet", "AddProductSevlet",
-    "UpdateCategoryServlet", "UpdateProductServlet",
-    "DeleteCategoryServlet", "DeleteProductServlet"})
+//@WebFilter(filterName = "AdminFilter", servletNames = {"AddCategoryServlet", "AddProductSevlet",
+//    "UpdateCategoryServlet", "UpdateProductServlet",
+//    "DeleteCategoryServlet", "DeleteProductServlet"})
 public class AdminFilter implements Filter {
 
     @Override

@@ -61,12 +61,13 @@ public class ProductDAO {
         boolean exist=false;
         int rows=0;           
               try{
+                  System.out.println(p.getName());
                     query=new String("select * from product");
                     rs=stmt.executeQuery(query);
                     rs.beforeFirst();
                     while(rs.next())
                     {
-                        if(p.getId()==rs.getInt("ID"))
+                        if(p.getName()==rs.getString("NAME"))
                         {
                            exist=true; 
                         }
@@ -78,11 +79,11 @@ public class ProductDAO {
                             +p.getQuantity()+","
                             +p.getPrice()+","
                             +p.getOffer()+","
-                            +"'"+p.getDescription()+"'"
+                            +"'"+p.getDescription()+"',"
                             +p.getCategoryId()+")");
                     rows=connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeUpdate(new_query);
                     }
-                    
+                    connection.commit();
               }catch(SQLIntegrityConstraintViolationException ex)
               {
                   ex.printStackTrace();
@@ -94,7 +95,7 @@ public class ProductDAO {
               {
                   ex.printStackTrace();
               }
-           
+              
               return rows;
     }
     
@@ -149,7 +150,8 @@ public class ProductDAO {
          try{
                 products = new Vector<Product>();
                 query=new String("select * from product");
-                rs=stmt.executeQuery(query);
+                rs=connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(query);
+                    rs.beforeFirst();
                     while (rs.next())
                     {   
                         Product p = new Product();
