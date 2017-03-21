@@ -38,7 +38,7 @@ public class DeleteProductServlet extends HttpServlet {
         }finally{
             productDAO.disconnect();
         }
-       
+        response.sendRedirect("adminpages/viewProduct.jsp");
     }
 
     @Override
@@ -47,8 +47,9 @@ public class DeleteProductServlet extends HttpServlet {
         String name;
         try{
             if(productDAO.connect()){
-                name=(String) request.getAttribute("productName");
+                name=(String) request.getParameter("productName");
                 productDAO.deleteProduct(name);
+                System.out.println("hiiiiiiiiiiiiii"+name);
             }
                   
         }catch (Exception ex) {
@@ -56,7 +57,7 @@ public class DeleteProductServlet extends HttpServlet {
         }finally{
             productDAO.disconnect();
         }
-    
+        response.sendRedirect("AdminViewProducts");
     }
     
     

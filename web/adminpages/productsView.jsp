@@ -1,0 +1,116 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Users</title>
+        <!-- BOOTSTRAP STYLES-->
+        <link href="../assetsadmin/css/bootstrap.css" rel="stylesheet" />
+        <!-- FONTAWESOME STYLES-->
+        <link href="../assetsadmin/css/font-awesome.css" rel="stylesheet" />
+        <!-- MORRIS CHART STYLES-->
+
+        <!-- CUSTOM STYLES-->
+        <link href="../assetsadmin/css/custom.css" rel="stylesheet" />
+        <!-- GOOGLE FONTS-->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+        <!-- TABLE STYLES-->
+        <link href="../assetsadmin/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    </head>
+    <body>
+
+
+        <jsp:include page="AdminHeader.jsp" ></jsp:include>
+
+
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Users</h2>   
+                        <h5>Users view and Edit </h5>
+                        <a href=".jsp" style="margin-left: 22cm" class="btn btn-primary btn-lg">Add User</a>
+
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+                <hr />
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Advanced Tables -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                System Users
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                        <thead>
+                                            <tr>
+                                                <th>User Name</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Email</th>
+                                                <th>Address</th>
+                                                <th>Delete User</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <c:forEach var="user" items="${users}">
+                                                <tr class="odd gradeX">
+                                                    <td><a href="../AdminViewUser?uname=${user.userName}"><c:out value="${user.userName}"/></a></td>
+                                                    <td><c:out value="${user.fname}"/></td>
+                                                    <td><c:out value="${user.lname}"/></td>
+                                                    <td><c:out value="${user.email}"/></td>
+                                                    <td><c:out value="${user.address}"/></td>
+                                                    <td class="center" ><a onclick="ConfirmDelete" class="btn btn-danger">Delete</a></td>
+                                                </tr>
+                                            </c:forEach>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--End Advanced Tables -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <script>
+            function ConfirmDelete()
+            {
+                var x = confirm("Are you sure you want to delete User?");
+                if (x)
+                    document.location.href="../AdminDeleteUser?deleteuser=${user.userName}"; 
+                else
+                    return false;
+            }
+
+        </script>
+
+        <script src="../assetsadmin/js/jquery-1.10.2.js"></script>
+        <script src="../assetsadmin/js/bootstrap.min.js"></script>
+        <script src="../assetsadmin/js/jquery.metisMenu.js"></script>
+        <script src="../assetsadmin/js/dataTables/jquery.dataTables.js"></script>
+        <script src="../assetsadmin/js/dataTables/dataTables.bootstrap.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#dataTables-example').dataTable();
+            });
+        </script>
+        <script src="../assetsadmin/js/custom.js"></script>
+
+
+    </body>
+</html>
+
