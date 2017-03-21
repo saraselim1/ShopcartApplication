@@ -51,7 +51,6 @@
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Delete</th>
@@ -61,7 +60,6 @@
                                         <tbody>
                                             <c:forEach var="admin" items="${admins}">
                                                 <tr class="odd gradeX">
-                                                    <td><c:out value="${admin.id}"/></td>
                                                     <td><a href="../GettingOneAdmin?aname=${admin.name}" name="adminName"><c:out value="${admin.name}"/></a></td>
                                                     <td><c:out value="${admin.email}"/></td>
                                                     <td class="center" ><a onclick="ConfirmDelete" class="btn btn-danger" href="../DeleteAdminServlet?adminName=${admin.name}">Delete</a></td>

@@ -22,8 +22,10 @@ public class AddAdminServlet extends HttpServlet {
         Admin admin = new Admin();
         String name = request.getParameter("aname");
         String email = request.getParameter("aemail");
+        String password = request.getParameter("apassword");
         admin.setName(name);
         admin.setEmail(email);
+        admin.setPassword(password);
         AdminDAO adminDAO = new AdminDAO();
 
         boolean result = adminDAO.addAdmin(admin);

@@ -48,11 +48,11 @@
                 <div class="span9">
                     <ul class="breadcrumb">
                     </ul>
-                    <h3> Add Admin</h3>	
+                    <h3> Log In</h3>	
                     
                     <hr class="soft"/>
                     <div class="well">
-                        <form action = "../AddAdminServlet" method = "post" class="form-horizontal">
+                        <form action = "../AdminLoginServlet" method = "post" class="form-horizontal">
                             <h3>Admin Data</h3>
 
                             
@@ -60,24 +60,22 @@
                             <div class="control-group">
                                 <label class="control-label" for="inputLname">Admin Name <sup>*</sup></label>
                                 <div class="controls">
-                                    <input type="text" name="aname" id="inputUsername" placeholder="Admin Name" required>
+                                    <input type="text" name="name" id="inputUsername" placeholder="Admin Name" required>
                                 </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label" for="inputEmail">Email <sup>*</sup></label>
-                                <div class="controls">
-                                    <input type="email" name="aemail" placeholder="Email" required>
-                                </div>
-                            </div>	  
+                            </div>  
                             <div class="control-group">
                                 <label class="control-label">Password <sup>*</sup></label>
                                 <div class="controls">
-                                    <input type="password" name="apassword" placeholder="Password" required="">
+                                    <input type="password" name="password" placeholder="Password" required="">
                                 </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label class="control-label" var="msg" valaue="${msg}" style="color:red">${msg} <sup>*</sup></label>
                             </div>
                             <div class="control-group">
                                 <div class="controls">
-                                    <input type="submit" name="submitAccount" class="btn btn-primary btn-lg" value="Add" class="exclusive shopBtn">
+                                    <input type="submit" name="submitAccount" class="btn btn-primary btn-lg" value="Log In" class="exclusive shopBtn">
                                 </div>
                             </div>
                         </form>
