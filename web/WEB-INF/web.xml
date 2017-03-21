@@ -12,8 +12,8 @@
             <web-resource-name>
                 SecuredAdminManpulaion
             </web-resource-name>
-            <url-pattern>/AddAdminServlet</url-pattern>
-            <url-pattern>/DeleteAdminServlet</url-pattern>
+            <!--<url-pattern>/AddAdminServlet</url-pattern>-->
+            <!--<url-pattern>/DeleteAdminServlet</url-pattern>-->
             <url-pattern>/UpdateAdminServlet</url-pattern>
         </web-resource-collection>
         <auth-constraint>
@@ -66,6 +66,10 @@
         <servlet-name>OrderDelete</servlet-name>
         <servlet-class>controller.order.DeletengOrderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminViewServlet</servlet-name>
+        <servlet-class>controller.admin.AdminViewServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AllUsers</servlet-name>
         <url-pattern>/AllUsers</url-pattern>
@@ -102,12 +106,15 @@
         <servlet-name>OrderDelete</servlet-name>
         <url-pattern>/OrderDelete</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminViewServlet</servlet-name>
+        <url-pattern>/AdminViewServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
     <welcome-file-list>
         <welcome-file>pages/home.jsp</welcome-file>
     </welcome-file-list>

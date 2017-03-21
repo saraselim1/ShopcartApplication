@@ -5,11 +5,13 @@
  */
 package model.beans;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Sara Selim
  */
-public class Admin {
+public class Admin implements Serializable {
 
     private int id;
     private String name;

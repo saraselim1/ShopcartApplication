@@ -66,7 +66,7 @@
                             <a  href="${pageContext.request.contextPath}/adminpages/#"><i class="fa fa-table fa-3x"></i> Orders</a>
                         </li>
                         <li>
-                            <a  href="${pageContext.request.contextPath}/adminpages/#"><i class="fa fa-table fa-3x"></i> Admins</a>
+                            <a  href="${pageContext.request.contextPath}/AdminViewServlet"><i class="fa fa-table fa-3x"></i> Admins</a>
                         </li>
                        
                     </ul>
