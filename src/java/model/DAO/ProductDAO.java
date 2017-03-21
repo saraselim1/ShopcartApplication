@@ -74,13 +74,14 @@ public class ProductDAO {
                     }
                     if(!exist)
                     {
-                        String new_query=new String("insert into product (NAME, QUANTITY_IN_STOCK, PRICE, OFFER, DESCRIPTION, CATEGORY_ID) values ('"
+                        String new_query=new String("insert into product (NAME, QUANTITY_IN_STOCK, PRICE, OFFER, DESCRIPTION, CATEGORY_ID,IMG) values ('"
                             +p.getName()+"',"
                             +p.getQuantity()+","
                             +p.getPrice()+","
                             +p.getOffer()+","
                             +"'"+p.getDescription()+"',"
-                            +p.getCategoryId()+")");
+                            +p.getCategoryId()+","
+                            +"'"+p.getImgMaster()+"')");
                     rows=connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeUpdate(new_query);
                     }
                     connection.commit();
@@ -108,10 +109,11 @@ public class ProductDAO {
                     rs.beforeFirst();
                     while(rs.next())
                     {
-                        if(name==rs.getString("NAME"))
+                        if(name.equals(rs.getString("NAME")))
                         {
                            query=new String("delete from product where NAME ='"+name+"'");
                            rows_effected=connection.createStatement().executeUpdate(query); 
+                            System.out.println("deleted");
                         }
                     }    
               }catch(SQLException ex)
@@ -132,7 +134,8 @@ public class ProductDAO {
                             "PRICE="+p.getPrice()+","+
                             "OFFER="+p.getOffer()+","+
                             "DESCRIPTION='"+p.getDescription()+"',"+
-                            "CATEGORY_ID="+p.getCategoryId()+" where ID="+p.getId());
+                            "CATEGORY_ID="+p.getCategoryId()+","+
+                            "IMG='"+p.getImgMaster()+"' where ID="+p.getId());
                     rows=connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeUpdate(new_query);
                      
               }catch(SQLIntegrityConstraintViolationException ex)
@@ -220,25 +223,26 @@ public class ProductDAO {
          try{
                // String nameLower= name.toLowerCase();
                 query=new String("select * from product where name = '"+name+"'");
-                rs=stmt.executeQuery(query);
-                    if(rs.next())
+                ResultSet rss=connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(query);
+                    if(rss.next())
                     {  
                         String innerQuery = new String("select * from PRODUCT_IMAGES where PRODUCT_NAME = '"+name+"'");
-                        ResultSet resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(innerQuery);
-                        resultSet.next();
-                        p.setId(rs.getInt("ID"));
-                        p.setName(rs.getString("NAME"));
-                        p.setQuantity(rs.getInt("QUANTITY_IN_STOCK"));
-                        p.setPrice(rs.getInt("PRICE"));
-                        p.setOffer(rs.getInt("OFFER"));
-                        p.setDescription(rs.getString("DESCRIPTION"));
-                        p.setCategoryId(rs.getInt("CATEGORY_ID"));
-                        p.setImgMaster(rs.getString("IMG"));
-                        if(resultSet != null){
-                            p.setImg1(resultSet.getString("IMG1"));
-                            p.setImg2(resultSet.getString("IMG2"));
-                            p.setImg3(resultSet.getString("IMG3"));
-                        }
+                        //ResultSet resultSet1 = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(innerQuery);
+//                        resultSet1.beforeFirst();
+//                        resultSet1.next();
+                        p.setId(rss.getInt("ID"));
+                        p.setName(rss.getString("NAME"));
+                        p.setQuantity(rss.getInt("QUANTITY_IN_STOCK"));
+                        p.setPrice(rss.getInt("PRICE"));
+                        p.setOffer(rss.getInt("OFFER"));
+                        p.setDescription(rss.getString("DESCRIPTION"));
+                        p.setCategoryId(rss.getInt("CATEGORY_ID"));
+                        p.setImgMaster(rss.getString("IMG"));
+//                        if(resultSet1 != null){
+//                            p.setImg1(resultSet1.getString("IMG1"));
+//                            p.setImg2(resultSet1.getString("IMG2"));
+//                            p.setImg3(resultSet1.getString("IMG3"));
+//                        }
                     }
                    
                    
