@@ -1,8 +1,10 @@
 package controller.cart;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,16 +37,24 @@ public class UpdateProductCartServlet extends HttpServlet {
             if (quantity <= quatityInStock) {
                 boolean result = cartProductDAO.updateProductart(user.getCart().getId(), productId, quantity, price);
                 ProductDAO productDAO = new ProductDAO();
-                int oldQuantity  =  user.getCart().getProduct().stream().filter(old -> old.getProductId() == productId).collect(Collectors.toList()).get(0).getQuantity();
-                int newQuantityInStock = ((quatityInStock + oldQuantity)   - quantity);
+                int oldQuantity = user.getCart().getProduct().stream().filter(old -> old.getProductId() == productId).collect(Collectors.toList()).get(0).getQuantity();
+                int newQuantityInStock = ((quatityInStock + oldQuantity) - quantity);
                 pro.setQuantity(newQuantityInStock);
                 if (productDAO.connect()) {
                     productDAO.updateProduct(pro);
                 }
                 productDAO.disconnect();
             } else {
-                request.setAttribute("msg", "Sorry Quanity is not valiad");
+                String str = "the quantity is not avaliable ";
+                //request.setAttribute("msg", str);
+                PrintWriter out = response.getWriter();
+                out.write(str);
             }
+        } else {
+            String str = "Please logim firest ";
+            //request.setAttribute("msg", str);
+            PrintWriter out = response.getWriter();
+            out.write(str);
         }
     }
 }

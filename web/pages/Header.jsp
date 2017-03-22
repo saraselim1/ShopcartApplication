@@ -46,13 +46,13 @@
                     contentType: 'application/json',
                     dataType: 'json',
                     success: function (data, textStatus, jqXHR) {
-                     }
+                    }
                 });
 
             }
         </script>
     </header>
-    <body onload="getUserCookie()">
+    <body >
         <!-- Upper Header Section -->
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="topNav">
@@ -65,12 +65,15 @@
                         <c:if test="${sessionScope.user != null}" >
                             <a href="${pageContext.request.contextPath}/ViewProfileServlet"><span class="icon-user"></span> My Account</a>
                             <a href="${pageContext.request.contextPath}/GettingAllProductsInCart"><span class="icon-shopping-cart"></span>
-                                ${fn:length(sessionScope.user.cart.product)} items </a>
+                                Cart items </a>
                             <a href="${pageContext.request.contextPath}/UserOrders"><span class="icon-shopping-cart"></span> Orders </a>
                         </c:if>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="control-group">
+            <label id="message" class="control-label" var="msg" valaue="${msg}" style="color:red"></label>
         </div>
         <div class="container">
             <header id="header">
@@ -90,13 +93,19 @@
                         <ul class="nav">
                             <li class="active"><a href="${pageContext.request.contextPath}/pages/home.jsp">Home	</a></li>
                         </ul>
+                        
+                        <ul class="nav">
+                            <c:if test="${requestScope.msg != null }">
+                                <li>${requestScope.msg}</li>
+                            </c:if>
+                        </ul>
                         <div  id="searchArea">
                             <form action="#" class="navbar-search pull-left">
                                 <input id="searchText" type="text" placeholder="Search" class="search-query span2">
                                 <button type="button" onclick="requestProductListByName()" class="add-on"><i class="icon-search"></i></button>
                             </form>
                         </div>
-                        <c:if test="${sessionScope.user == null}" >
+                            <c:if test="${sessionScope.user == null}" >
                             <ul class="nav pull-right">
                                 <li class="dropdown">
                                     <a data-toggle="dropdown" class="dropdown-toggle" href="#"><span class="icon-lock"></span> Login <b class="caret"></b></a>

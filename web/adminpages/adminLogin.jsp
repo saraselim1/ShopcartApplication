@@ -54,25 +54,24 @@
                         <hr class="soft"/>
                         <div class="well">
                             <form action = "${pageContext.request.contextPath}/AdminLoginServlet" method = "post" class="form-horizontal">
-                                <h3>Admin Data</h3>
+                            <h3>Admin Data</h3>
 
 
 
-                                <div class="control-group">
-                                    <label class="control-label" for="inputLname">Admin Name <sup>*</sup></label>
-                                    <div class="controls">
-                                        <input type="text" name="name" id="inputUsername" placeholder="Admin Name" required>
-                                    </div>
-                                </div>  
-                                <div class="control-group">
-                                    <label class="control-label">Password <sup>*</sup></label>
-                                    <div class="controls">
-                                        <input type="password" name="password" placeholder="Password" required="">
-                                    </div>
+                            <div class="control-group">
+                                <label class="control-label" for="inputLname">Admin Name <sup>*</sup></label>
+                                <div class="controls">
+                                    <input type="text" name="name" id="inputUsername" placeholder="Admin Name" required>
                                 </div>
-
-                                <div class="control-group">
-                                    <label id="message" class="control-label" var="msg" valaue="${msg}" style="color:red"></label>
+                            </div>  
+                            <div class="control-group">
+                                <label class="control-label">Password <sup>*</sup></label>
+                                <div class="controls">
+                                    <input type="password" name="password" placeholder="Password" required="">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label id="message" class="control-label" var="msg" valaue="${msg}" style="color:red"></label>
                             </div>
                             <div class="control-group">
                                 <div class="controls">
@@ -165,9 +164,9 @@
         <script src="${pageContext.request.contextPath}/assetsadmin/js/dataTables/jquery.dataTables.js"></script>
         <script src="${pageContext.request.contextPath}/assetsadmin/js/dataTables/dataTables.bootstrap.js"></script>
         <script>
-                            $(document).ready(function () {
-                                $('#dataTables-example').dataTable();
-                            });
+            $(document).ready(function () {
+                $('#dataTables-example').dataTable();
+            });
         </script>
         <script src="${pageContext.request.contextPath}/assetsadmin/js/custom.js"></script>
 

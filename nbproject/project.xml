@@ -55,6 +55,7 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+<<<<<<< HEAD
                     <file>${file.reference.commons-beanutils-1.9.3-javadoc.jar-2}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
@@ -126,6 +127,11 @@
                     <file>${file.reference.commons-logging.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+=======
+                    <file>${file.reference.commons-beanutils-1.9.3.jar-2}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+>>>>>>> b3b8579c4c1ca2f8d1e308b6bd785349733498e7
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
