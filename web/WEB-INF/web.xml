@@ -12,8 +12,8 @@
             <web-resource-name>
                 SecuredAdminManpulaion
             </web-resource-name>
-            <!--<url-pattern>/AddAdminServlet</url-pattern>-->
-            <!--<url-pattern>/DeleteAdminServlet</url-pattern>-->
+            <url-pattern>/AddAdminServlet</url-pattern>
+            <url-pattern>/DeleteAdminServlet</url-pattern>
             <url-pattern>/UpdateAdminServlet</url-pattern>
         </web-resource-collection>
         <auth-constraint>
@@ -74,6 +74,10 @@
         <servlet-name>AdminLoginServlet</servlet-name>
         <servlet-class>controller.admin.AdminLoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogOutServlet</servlet-name>
+        <servlet-class>controller.admin.LogOutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AllUsers</servlet-name>
         <url-pattern>/AllUsers</url-pattern>
@@ -117,6 +121,10 @@
     <servlet-mapping>
         <servlet-name>AdminLoginServlet</servlet-name>
         <url-pattern>/AdminLoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogOutServlet</servlet-name>
+        <url-pattern>/LogOutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

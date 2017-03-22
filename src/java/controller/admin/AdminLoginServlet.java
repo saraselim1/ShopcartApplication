@@ -23,6 +23,8 @@ import model.beans.Admin;
  */
 public class AdminLoginServlet extends HttpServlet {
 
+    boolean flag = false;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -76,30 +78,42 @@ public class AdminLoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
         String name = request.getParameter("name");
         String password = request.getParameter("password");
+        System.out.println(name + "    " + password);
 
         AdminDAO dbConn = new AdminDAO();
         List<Admin> admins;
         admins = dbConn.getAdmins();
 
         for (Admin a : admins) {
+            System.out.println(a.getName() + "    " + a.getPassword());
             if (a.getName().equals(name) && a.getPassword().equals(password)) {
-
-                HttpSession session = request.getSession();
-                session.setAttribute("admin", name);
-
-                RequestDispatcher dd = request.getRequestDispatcher("adminpages/AdminHome.jsp");
-
-                dd.forward(request, response);
-            } else{
-                HttpSession session = request.getSession();
-                session.setAttribute("msg", "invalid admin name or password");
-                RequestDispatcher dd = request.getRequestDispatcher("adminpages/adminLogin.jsp?");
+                flag = true;
             }
+
         }
 
-        
+        if (flag) {
+            flag = false;
+            HttpSession session = request.getSession();
+            session.setAttribute("admin", name);
+
+            RequestDispatcher dd = request.getRequestDispatcher("adminpages/AdminHome.jsp");
+
+            dd.forward(request, response);
+
+        } else {
+            //out.print("invalid admin name or password");
+            String msg = "invalid admin name or password";
+            //request.setAttribute("msg", msg);
+
+            //request.("adminpages/adminLogin.jsp?");
+            response.sendRedirect("adminpages/adminLogin.jsp?msg="+msg);
+            //rd.include(request, response);
+        }
 
     }
 
