@@ -39,16 +39,6 @@
                         }
                     }});
             }
-            function startLoading() {
-                getUserCookie();
-                if (${requestScope.msg != null}) {
-                    console.log( "${requestScope.msg}");
-                    window.alert("${requestScope.msg}");
-                    //$('#message').valaue("${requestScope.msg}");
-                    //$('#errorDiv').append('<label class="control-label" var="msg" valaue="${requestScope.msg} " style="color:red">${requestScope.msg}</label>');
-                    //$('#errorDiv').css("display", "block");
-                }
-            }
             function getUserCookie() {
                 $.ajax({
                     url: "Home?date" + new Date(),
@@ -62,7 +52,7 @@
             }
         </script>
     </header>
-    <body onload="startLoading();">
+    <body >
         <!-- Upper Header Section -->
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="topNav">
@@ -75,7 +65,7 @@
                         <c:if test="${sessionScope.user != null}" >
                             <a href="${pageContext.request.contextPath}/ViewProfileServlet"><span class="icon-user"></span> My Account</a>
                             <a href="${pageContext.request.contextPath}/GettingAllProductsInCart"><span class="icon-shopping-cart"></span>
-                                ${fn:length(sessionScope.user.cart.product)} items </a>
+                                Cart items </a>
                             <a href="${pageContext.request.contextPath}/UserOrders"><span class="icon-shopping-cart"></span> Orders </a>
                         </c:if>
                     </div>
@@ -103,13 +93,19 @@
                         <ul class="nav">
                             <li class="active"><a href="${pageContext.request.contextPath}/pages/home.jsp">Home	</a></li>
                         </ul>
+                        
+                        <ul class="nav">
+                            <c:if test="${requestScope.msg != null }">
+                                <li>${requestScope.msg}</li>
+                            </c:if>
+                        </ul>
                         <div  id="searchArea">
                             <form action="#" class="navbar-search pull-left">
                                 <input id="searchText" type="text" placeholder="Search" class="search-query span2">
                                 <button type="button" onclick="requestProductListByName()" class="add-on"><i class="icon-search"></i></button>
                             </form>
                         </div>
-                        <c:if test="${sessionScope.user == null}" >
+                            <c:if test="${sessionScope.user == null}" >
                             <ul class="nav pull-right">
                                 <li class="dropdown">
                                     <a data-toggle="dropdown" class="dropdown-toggle" href="#"><span class="icon-lock"></span> Login <b class="caret"></b></a>

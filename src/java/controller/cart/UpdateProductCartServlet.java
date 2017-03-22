@@ -1,6 +1,7 @@
 package controller.cart;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
@@ -45,16 +46,15 @@ public class UpdateProductCartServlet extends HttpServlet {
                 productDAO.disconnect();
             } else {
                 String str = "the quantity is not avaliable ";
-                request.setAttribute("msg", str);
-                RequestDispatcher rdView = getServletContext().getRequestDispatcher("/pages/home.jsp");
-                rdView.include(request, response);
-                request.setAttribute("msg", "Sorry Quanity is not valiad");
+                //request.setAttribute("msg", str);
+                PrintWriter out = response.getWriter();
+                out.write(str);
             }
         } else {
             String str = "Please logim firest ";
-            request.setAttribute("msg", str);
-            RequestDispatcher rdView = getServletContext().getRequestDispatcher("/pages/home.jsp");
-            rdView.include(request, response);
+            //request.setAttribute("msg", str);
+            PrintWriter out = response.getWriter();
+            out.write(str);
         }
     }
 }

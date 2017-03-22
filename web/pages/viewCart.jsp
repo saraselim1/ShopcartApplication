@@ -8,10 +8,9 @@
                     quantity: newQuantity,
                     price: priceValue,
                     productId: productIDValue
-
                 },
                 function (data, status) {
-                    console.log(data);
+                    alert(data);
                 });
     }
     function deleteItem(productIdValue) {

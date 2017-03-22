@@ -55,7 +55,7 @@ public class GettingOneUserServlet extends HttpServlet {
                 String str = "login failed , user name or passsword is not correct";
                 request.setAttribute("msg", str);
                 RequestDispatcher rdView = getServletContext().getRequestDispatcher("/pages/home.jsp");
-                rdView.include(request, response);
+                rdView.forward(request, response);
             }
             dbConn.disconnect();
         }

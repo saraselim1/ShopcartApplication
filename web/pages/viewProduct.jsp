@@ -9,7 +9,7 @@
 
                 },
                 function (data, status) {
-                    console.log(data);
+                    alert(data);
                     $('#addbtn').hide();
 
                 });
