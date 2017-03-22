@@ -4,17 +4,17 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title> Admin </title>
-        <link href="../assetsadmin/css/bootstrap.css" rel="stylesheet" />
-        <link href="../assetsadmin/css/font-awesome.css" rel="stylesheet" />
-        <link href="../assetsadmin/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
-        <link href="../assetsadmin/css/custom.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}/assetsadmin/css/bootstrap.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}/assetsadmin/css/font-awesome.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}/assetsadmin/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}/assetsadmin/css/custom.css" rel="stylesheet" />
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-        <script src="../assetsadmin/js/jquery-1.10.2.js"></script>
-        <script src="../assetsadmin/js/bootstrap.min.js"></script>
-        <script src="../assetsadmin/js/jquery.metisMenu.js"></script>
-        <script src="../assetsadmin/js/morris/raphael-2.1.0.min.js"></script>
-        <script src="../assetsadmin/js/morris/morris.js"></script>
-        <script src="../assetsadmin/js/custom.js"></script>
+        <script src="${pageContext.request.contextPath}/assetsadmin/js/jquery-1.10.2.js"></script>
+        <script src="${pageContext.request.contextPath}/assetsadmin/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assetsadmin/js/jquery.metisMenu.js"></script>
+        <script src="${pageContext.request.contextPath}/assetsadmin/js/morris/raphael-2.1.0.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assetsadmin/js/morris/morris.js"></script>
+        <script src="${pageContext.request.contextPath}/assetsadmin/js/custom.js"></script>
     </head>
     <body>
         <script>

@@ -36,7 +36,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="AdminHome.jsp">Project Admin</a> 
+                    <a class="navbar-brand" href="AdminHome.jsp">${admin}</a> 
                 </div>
                 <div style="color: white;
                      padding: 15px 50px 5px 50px;
@@ -63,7 +63,7 @@
                             <a  href="${pageContext.request.contextPath}/AdminViewCategory"><i class="fa fa-table fa-3x"></i> Category</a>
                         </li>
                         <li>
-                            <a  href="${pageContext.request.contextPath}/adminpages/#"><i class="fa fa-table fa-3x"></i> Orders</a>
+                            <a  href="${pageContext.request.contextPath}/AdminGetOrders"><i class="fa fa-table fa-3x"></i> Orders</a>
                         </li>
                         <li>
                             <a  href="${pageContext.request.contextPath}/AdminViewServlet"><i class="fa fa-table fa-3x"></i> Admins</a>

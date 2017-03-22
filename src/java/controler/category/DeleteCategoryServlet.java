@@ -31,12 +31,14 @@ public class DeleteCategoryServlet extends HttpServlet{
                 name=(String) request.getParameter("categoryName");
                 categoryDAO.deleteCategory(name);
             }
+            
+           
                   
         }catch (Exception ex) {
             Logger.getLogger(DeleteCategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             categoryDAO.disconnect();
-            response.sendRedirect("adminpages/categoriesView.jsp");
+            response.sendRedirect(request.getSession().getServletContext().getContextPath()+"/AdminViewCategory");
         }
        
     }
@@ -56,7 +58,7 @@ public class DeleteCategoryServlet extends HttpServlet{
             Logger.getLogger(DeleteCategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             categoryDAO.disconnect();
-            response.sendRedirect("adminpages/categoriesView.jsp");
+            response.sendRedirect(request.getSession().getServletContext().getContextPath()+"/AdminViewCategory");
         }
     }
     

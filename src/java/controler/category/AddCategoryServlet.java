@@ -41,7 +41,7 @@ public class AddCategoryServlet extends HttpServlet{
             Logger.getLogger(AddCategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             categoryDAO.disconnect();
-            response.sendRedirect(request.getSession().getServletContext().getContextPath()+"/adminpages/addCategory.jsp");
+            response.sendRedirect(request.getSession().getServletContext().getContextPath()+"/AdminViewCategory");
 
         }
        

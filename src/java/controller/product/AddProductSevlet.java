@@ -75,7 +75,8 @@ public class AddProductSevlet extends HttpServlet {
             System.out.println(product.toString());
            if (productDAO.connect()) {
                 productDAO.addProduct(product);
-                response.sendRedirect(request.getSession().getServletContext().getContextPath() + "/adminpages/addProduct.jsp");
+            productDAO.disconnect();
+            response.sendRedirect(request.getSession().getServletContext().getContextPath() + "/AdminViewProducts");
 //            }se.sendRedirect("viewProducts");
         } 
             }catch (Exception ex) {

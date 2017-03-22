@@ -7,17 +7,10 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Users</title>
-        <!-- BOOTSTRAP STYLES-->
         <link href="../assetsadmin/css/bootstrap.css" rel="stylesheet" />
-        <!-- FONTAWESOME STYLES-->
         <link href="../assetsadmin/css/font-awesome.css" rel="stylesheet" />
-        <!-- MORRIS CHART STYLES-->
-
-        <!-- CUSTOM STYLES-->
         <link href="../assetsadmin/css/custom.css" rel="stylesheet" />
-        <!-- GOOGLE FONTS-->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-        <!-- TABLE STYLES-->
         <link href="../assetsadmin/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
     </head>
     <body>
@@ -30,45 +23,40 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Users</h2>   
-                        <h5>Users view and Edit </h5>
-                        <a href="AddUser.jsp" style="margin-left: 22cm" class="btn btn-primary btn-lg">Add User</a>
-
+                        <h2>Orders</h2>   
+                        <h5>Orders view </h5>
                     </div>
                 </div>
-                <!-- /. ROW  -->
+                
                 <hr />
 
                 <div class="row">
                     <div class="col-md-12">
-                        <!-- Advanced Tables -->
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                System Users
+                                System Orders
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                         <thead>
                                             <tr>
-                                                <th>User Name</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Email</th>
-                                                <th>Address</th>
-                                                <th>Delete User</th>
+                                                <th>Order Id</th>
+                                                <th>Total Price</th>
+                                                <th>Date</th>
+                                                <th>User ID</th>
+                                                <th>product</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            <c:forEach var="user" items="${users}">
+                                            <c:forEach var="order" items="${ordersAll}">
                                                 <tr class="odd gradeX">
-                                                    <td><a href="../AdminViewUser?uname=${user.userName}"><c:out value="${user.userName}"/></a></td>
-                                                    <td><c:out value="${user.fname}"/></td>
-                                                    <td><c:out value="${user.lname}"/></td>
-                                                    <td><c:out value="${user.email}"/></td>
-                                                    <td><c:out value="${user.address}"/></td>
-                                                    <td class="center" ><a href="../AdminDeleteUser?uname=${user.userName}" class="btn btn-danger">Delete</a></td>
+                                                    <td><a href="#"><c:out value="${order.id}"/></a></td>
+                                                    <td><c:out value="${order.totalPrice}"/></td>
+                                                    <td><c:out value="${order.date}"/></td>
+                                                    <td><c:out value="${order.userId}"/></td>
+                                                    <td><c:out value="${order.product}"/></td>
                                                 </tr>
                                             </c:forEach>
 
@@ -78,7 +66,6 @@
 
                             </div>
                         </div>
-                        <!--End Advanced Tables -->
                     </div>
                 </div>
             </div>

@@ -51,7 +51,7 @@ public class UpdateProductServlet extends HttpServlet {
             Logger.getLogger(AddProductSevlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             productDAO.disconnect();
-            response.sendRedirect("adminpages/updateProduct.jsp");
+            response.sendRedirect("AdminViewProducts");
 
         }
        
@@ -89,7 +89,7 @@ public class UpdateProductServlet extends HttpServlet {
             Logger.getLogger(AddProductSevlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             productDAO.disconnect();
-            response.sendRedirect("adminpages/updateProduct.jsp");
+            response.sendRedirect("AdminViewProducts");
         }
     }
 }

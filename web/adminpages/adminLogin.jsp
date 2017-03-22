@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add User</title>
+        <title>Admin Login</title>
         <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet" />
         <link href="${pageContext.request.contextPath}/assets/style.css" rel="stylesheet" />
         <link href="${pageContext.request.contextPath}/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -28,7 +28,7 @@
 
 
 
-        <jsp:include page="AdminHeader.jsp" ></jsp:include>
+        <%--<jsp:include page="AdminHeader.jsp" ></jsp:include>--%>
 
 
 

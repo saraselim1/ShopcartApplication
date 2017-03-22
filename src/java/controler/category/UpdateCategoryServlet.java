@@ -45,7 +45,7 @@ public class UpdateCategoryServlet extends HttpServlet{
             Logger.getLogger(UpdateCategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             categoryDAO.disconnect();
-            response.sendRedirect("adminpages/updateCategory.jsp");
+            response.sendRedirect("AdminViewCategory");
         }
        
     }
@@ -72,7 +72,7 @@ public class UpdateCategoryServlet extends HttpServlet{
             Logger.getLogger(UpdateCategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             categoryDAO.disconnect();
-            response.sendRedirect("adminpages/updateCategory.jsp");
+            response.sendRedirect("AdminViewCategory");
 
         }
     }
