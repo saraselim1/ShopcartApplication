@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Users</title>
+        <title>Products</title>
         <!-- BOOTSTRAP STYLES-->
         <link href="../assetsadmin/css/bootstrap.css" rel="stylesheet" />
         <!-- FONTAWESOME STYLES-->

@@ -50,9 +50,9 @@
                         <li class="text-center">
                             <img src="${pageContext.request.contextPath}/assetsadmin/img/find_user.png" class="user-image img-responsive"/>
                         </li>
-                        <li>
+<!--                        <li>
                             <a  href="${pageContext.request.contextPath}/adminpages/AdminHome.jsp"><i class="fa fa-dashboard fa-3x"></i> Home</a>
-                        </li>
+                        </li>-->
                         <li>
                             <a  href="${pageContext.request.contextPath}/ViewAllUsers"><i class="fa fa-table fa-3x"></i> Users</a>
                         </li>

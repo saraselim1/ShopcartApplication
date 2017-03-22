@@ -101,7 +101,7 @@ public class AdminLoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("admin", name);
 
-            RequestDispatcher dd = request.getRequestDispatcher("adminpages/AdminHome.jsp");
+            RequestDispatcher dd = request.getRequestDispatcher("adminpages/AdminsView.jsp");
 
             dd.forward(request, response);
 
