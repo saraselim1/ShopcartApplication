@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <input name='description' value="${requestScope.category.description}"  min="0" type="number" class="form-control" placeholder="PLease Enter Keyword" />
+                    <input name='description' value="${requestScope.category.description}"  type="text" class="form-control" placeholder="PLease Enter Keyword" />
                 </div>
                 <div class="form-group">
                     <label>Products Number</label>
