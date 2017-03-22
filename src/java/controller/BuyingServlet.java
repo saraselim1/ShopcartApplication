@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -64,8 +65,9 @@ public class BuyingServlet extends HttpServlet {
             user.getCart().getProduct().forEach((_item) -> {
                 cartProductDAO.deleteProductFromCart(user.getCart().getId(), _item.getProductId());
             });
-            PrintWriter out = response.getWriter();
-            out.write("ebat 5las eshtrat");
+            request.setAttribute("order", order);
+            RequestDispatcher rdHeader = getServletContext().getRequestDispatcher("/pages/afterBuying.jsp");
+            rdHeader.include(request, response);
         } else {
             PrintWriter out = response.getWriter();
             out.write("You don't hane enough money");

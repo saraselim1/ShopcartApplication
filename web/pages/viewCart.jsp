@@ -71,8 +71,8 @@
                         </tr>
                     </tbody>
                 </table><br/>	
-                <a href="Home" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Continue Shopping </a>
-                <a href="BuyingServlet" class="shopBtn btn-large pull-right">Next <span class="icon-arrow-right"></span></a>
+                <a href="${pageContext.request.contextPath}/pages/home.jsp" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Continue Shopping </a>
+                <a href="BuyingServlet" class="shopBtn btn-large pull-right">Buy <span class="icon-arrow-right"></span></a>
             </div>
         </div>
     </div>

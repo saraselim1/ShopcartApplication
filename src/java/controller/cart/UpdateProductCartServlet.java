@@ -35,7 +35,9 @@ public class UpdateProductCartServlet extends HttpServlet {
             if (quantity <= quatityInStock) {
                 boolean result = cartProductDAO.updateProductart(user.getCart().getId(), productId, quantity, price);
                 ProductDAO productDAO = new ProductDAO();
-                pro.setQuantity(quatityInStock - quantity);
+                int oldQuantity  =  user.getCart().getProduct().stream().filter(old -> old.getProductId() == productId).collect(Collectors.toList()).get(0).getQuantity();
+                int newQuantityInStock = ((quatityInStock + oldQuantity)   - quantity);
+                pro.setQuantity(newQuantityInStock);
                 if (productDAO.connect()) {
                     productDAO.updateProduct(pro);
                 }

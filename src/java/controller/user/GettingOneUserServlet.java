@@ -8,6 +8,7 @@ package controller.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +30,7 @@ public class GettingOneUserServlet extends HttpServlet {
 
         String userName = request.getParameter("name");
         String password = request.getParameter("password");
+        String remmberMe = request.getParameter("remmberMe");
         UserDao dbConn = new UserDao();
         if (dbConn.connect()) {
             User user = dbConn.getUser(userName, password);
@@ -39,6 +41,12 @@ public class GettingOneUserServlet extends HttpServlet {
                 user.getCart().setProduct(cartProductDAO.getAllProductInCart(user.getCart().getId()));
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
+                if (remmberMe.equals("on")) {
+                    Cookie nameCookie = new Cookie("name", userName);
+                    Cookie passwordCookie = new Cookie("password", password);
+                    response.addCookie(nameCookie);
+                    response.addCookie(passwordCookie);
+                }
                 response.sendRedirect("pages/home.jsp");
             } else {
                 PrintWriter out = response.getWriter();
