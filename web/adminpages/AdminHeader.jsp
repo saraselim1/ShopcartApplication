@@ -41,7 +41,7 @@
                 <div style="color: white;
                      padding: 15px 50px 5px 50px;
                      float: right;
-                     font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+                     font-size: 16px;">  <a href="${pageContext.request.contextPath}/LogOutServlet" class="btn btn-danger square-btn-adjust">Logout</a> </div>
             </nav>   
             <!-- /. NAV TOP  -->
             <nav class="navbar-default navbar-side" role="navigation">
@@ -60,7 +60,7 @@
                             <a  href="${pageContext.request.contextPath}/AdminViewProducts"><i class="fa fa-table fa-3x"></i> Products</a>
                         </li>
                         <li>
-                            <a  href="${pageContext.request.contextPath}/GetAllCategorysServlet"><i class="fa fa-table fa-3x"></i> Category</a>
+                            <a  href="${pageContext.request.contextPath}/AdminViewCategory"><i class="fa fa-table fa-3x"></i> Category</a>
                         </li>
                         <li>
                             <a  href="${pageContext.request.contextPath}/adminpages/#"><i class="fa fa-table fa-3x"></i> Orders</a>

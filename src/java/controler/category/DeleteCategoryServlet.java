@@ -28,7 +28,7 @@ public class DeleteCategoryServlet extends HttpServlet{
         String name;
         try{
             if(categoryDAO.connect()){
-                name=(String) request.getAttribute("categoryName");
+                name=(String) request.getParameter("categoryName");
                 categoryDAO.deleteCategory(name);
             }
                   
@@ -36,6 +36,7 @@ public class DeleteCategoryServlet extends HttpServlet{
             Logger.getLogger(DeleteCategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             categoryDAO.disconnect();
+            response.sendRedirect("adminpages/categoriesView.jsp");
         }
        
     }
@@ -46,7 +47,8 @@ public class DeleteCategoryServlet extends HttpServlet{
         String name;
         try{
             if(categoryDAO.connect()){
-                name=(String) request.getAttribute("categoryName");
+                name=(String) request.getParameter("categoryName");
+                System.out.println(name);
                 categoryDAO.deleteCategory(name);
             }
                   
@@ -54,8 +56,8 @@ public class DeleteCategoryServlet extends HttpServlet{
             Logger.getLogger(DeleteCategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             categoryDAO.disconnect();
+            response.sendRedirect("adminpages/categoriesView.jsp");
         }
-    
     }
     
 }

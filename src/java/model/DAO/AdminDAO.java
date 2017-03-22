@@ -21,9 +21,10 @@ public class AdminDAO {
 
         try {
 
-            PreparedStatement ps = con.prepareStatement("insert  into admin(name, email) values (? , ?)");
+            PreparedStatement ps = con.prepareStatement("insert  into admin(name, email, password) values (? , ?, ?)");
             ps.setString(1, admin.getName());
             ps.setString(2, admin.getEmail());
+            ps.setString(3, admin.getPassword());
 
             rowsUpd = ps.executeUpdate();
 
@@ -122,8 +123,9 @@ public class AdminDAO {
                 int id = rs.getInt(1);
                 String name = rs.getString(2);
                 String email = rs.getString(3);
+                String password = rs.getString(4);
 
-                Admin admin = new Admin(id, name, email);
+                Admin admin = new Admin(id, name, email, password);
                 admins.add(admin);
             }
 
@@ -150,8 +152,9 @@ public class AdminDAO {
                 int id = rs.getInt(1);
                 String name = rs.getString(2);
                 String email = rs.getString(3);
+                String password = rs.getString(4);
 
-                admin = new Admin(id, name, email);
+                admin = new Admin(id, name, email, password);
             }
 
         } catch (SQLException ex) {
