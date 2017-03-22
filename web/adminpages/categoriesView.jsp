@@ -30,10 +30,9 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Users</h2>   
-                        <h5>Users view and Edit </h5>
-                        <a href=".jsp" style="margin-left: 22cm" class="btn btn-primary btn-lg">Add User</a>
-
+                        <h2>Categoirs</h2>   
+                        <h5>categories view and Edit </h5>
+                        <a href="addCategory.jsp" style="margin-left: 22cm" class="btn btn-primary btn-lg">Add category</a>
                     </div>
                 </div>
                 <!-- /. ROW  -->
@@ -44,31 +43,28 @@
                         <!-- Advanced Tables -->
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                System Users
+                                System Categories
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                         <thead>
                                             <tr>
-                                                <th>User Name</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Email</th>
-                                                <th>Address</th>
-                                                <th>Delete User</th>
-                                            </tr>
+                                                <th>Category Name</th>
+                                                <th>ID</th>
+                                                <th>Description</th>
+                                                <th>product Number</th>                                            </tr>
                                         </thead>
 
                                         <tbody>
-                                            <c:forEach var="user" items="${users}">
+                                            <c:forEach var="category" items="${categoryList}">
                                                 <tr class="odd gradeX">
-                                                    <td><a href="../AdminViewUser?uname=${user.userName}"><c:out value="${user.userName}"/></a></td>
-                                                    <td><c:out value="${user.fname}"/></td>
-                                                    <td><c:out value="${user.lname}"/></td>
-                                                    <td><c:out value="${user.email}"/></td>
-                                                    <td><c:out value="${user.address}"/></td>
-                                                    <td class="center" ><a onclick="ConfirmDelete" class="btn btn-danger">Delete</a></td>
+                                                    <td><a href="../AdminGetCategoryByName?name=${category.name}"><c:out value="${category.name}"/></a></td>
+                                                    <td><c:out value="${category.id}"/></td>
+                                                    <td><c:out value="${category.description}"/></td>
+                                                    <td><c:out value="${category.productNum}"/></td>
+                                                    <td class="center" ><a name="${category.name}" onclick="ConfirmDelete(name);" class="btn btn-danger">Delete</a></td>
+                                                    <td class="center" ><a href="../renderUpdateCategoryServlet?name=${category.name}" class="btn btn-danger">Update</a></td>
                                                 </tr>
                                             </c:forEach>
 
@@ -87,15 +83,12 @@
 
 
         <script>
-            function ConfirmDelete()
+            function ConfirmDelete(pName)
             {
-                var x = confirm("Are you sure you want to delete User?");
-                if (x)
-                    document.location.href="../AdminDeleteUser?deleteuser=${user.userName}"; 
-                else
-                    return false;
+                $("#t1").val(pName);
+                $("#deleteBtn").click();
             }
-
+           
         </script>
 
         <script src="../assetsadmin/js/jquery-1.10.2.js"></script>
@@ -109,8 +102,15 @@
             });
         </script>
         <script src="../assetsadmin/js/custom.js"></script>
+            
+            <!-- -->
+            <form hidden method="Post" action="${pageContext.request.contextPath}/DeleteCategoryServlet">
+                <input id="t1" hidden type="text" name="categoryName" value="">
+                <input hidden id="deleteBtn" type='submit' />
+            </form>
 
 
     </body>
 </html>
+
 

@@ -5,6 +5,7 @@
  */
 package model.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -13,7 +14,7 @@ import java.util.Vector;
  *
  * @author Sara Selim
  */
-public class Category {
+public class Category implements Serializable{
 
     private int id;
     private String name;

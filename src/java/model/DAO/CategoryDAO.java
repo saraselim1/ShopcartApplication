@@ -97,14 +97,14 @@ public class CategoryDAO {
         {
             int rows_effected=0;
               try{
-                    query=new String("select * from CATEGORY");
+                    query=new String("select * from category");
                     rs=stmt.executeQuery(query); 
                     rs.beforeFirst();
                     while(rs.next())
                     {
-                        if(name==rs.getString("NAME"))
+                        if(name.equals(rs.getString("NAME")))
                         {
-                           query=new String("delete from CATEGORY where NAME ="+name);
+                           query=new String("delete from CATEGORY where NAME ='"+name+"'");
                            rows_effected=connection.createStatement().executeUpdate(query); 
                         }
                     }    
@@ -179,6 +179,29 @@ public class CategoryDAO {
                         ex.printStackTrace();
               }
          return categorys;
+    }
+     
+     
+     public Category getCategoryByName(String name){
+         Category c = new Category();
+         try{
+               // String nameLower= name.toLowerCase();
+                query=new String("select * from category where name = '"+name+"'");
+                ResultSet rss=connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(query);
+                    if(rss.next())
+                    {  
+                        c.setId(rss.getInt("ID"));
+                        c.setName(rss.getString("NAME"));
+                        c.setDescription(rss.getString("DESCRIPTION"));
+                        c.setProductNum(rss.getInt("PRODUCT_NUM"));
+                    }
+                   
+                   
+              }catch(SQLException ex)
+              {
+                        ex.printStackTrace();
+              }
+         return c;
     }
     
 }

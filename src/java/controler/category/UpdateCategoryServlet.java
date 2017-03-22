@@ -28,6 +28,10 @@ public class UpdateCategoryServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Category category =new Category();
+        category.setName(request.getParameter("name").trim());
+        category.setId(Integer.parseInt(request.getParameter("id").trim()));
+        category.setDescription(request.getParameter("description").trim());
+        category.setProductNum(Integer.parseInt(request.getParameter("productNum").trim()));
         CategoryDAO categoryDAO =new CategoryDAO();
         try{
             BeanUtils.populate(category,request.getParameterMap());
@@ -41,6 +45,7 @@ public class UpdateCategoryServlet extends HttpServlet{
             Logger.getLogger(UpdateCategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             categoryDAO.disconnect();
+            response.sendRedirect("adminpages/updateCategory.jsp");
         }
        
     }
@@ -48,6 +53,12 @@ public class UpdateCategoryServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Category category =new Category();
+        int proNum = Integer.parseInt(request.getParameter("productNum").trim());
+        category.setName(request.getParameter("name").trim());
+        category.setId(Integer.parseInt(request.getParameter("id").trim()));
+        if(request.getParameter("description")!= null)
+            category.setDescription(request.getParameter("description").trim());
+        category.setProductNum(proNum);
         CategoryDAO categoryDAO =new CategoryDAO();
         try{
             BeanUtils.populate(category,request.getParameterMap());
@@ -61,6 +72,8 @@ public class UpdateCategoryServlet extends HttpServlet{
             Logger.getLogger(UpdateCategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             categoryDAO.disconnect();
+            response.sendRedirect("adminpages/updateCategory.jsp");
+
         }
     }
     
