@@ -1,7 +1,7 @@
 <script>
-    function addProductToCart(productIDValue, priceValue,newQuantity) {
-        //var newQuantity = $('#' + productIDValue).val();
-        $.post("UpdateProductCartServlet?date" + new Date(),
+    function addProductToCart(productIDValue, priceValue) {
+        var newQuantity = $('#quantityToAdd').val();
+        $.post("AddProductToCartServlet?date" + new Date(),
                 {
                     quantity: newQuantity,
                     price: priceValue,
@@ -10,9 +10,15 @@
                 },
                 function (data, status) {
                     console.log(data);
+                    $('#addbtn').hide();
+
                 });
     }
 </script>
+
+<script src="${pageContext.request.contextPath}/assets/js/jquery.easing-1.3.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
 <jsp:include page="Header.jsp" ></jsp:include>
     <div class="container">
         <div class="row">
@@ -43,11 +49,11 @@
                         <h3>${requestScope.name}</h3>
                         <hr class="soft"/>
 
-                        <form class="form-horizontal qtyFrm">
+                        <div class="form-horizontal qtyFrm">
                             <div class="control-group">
                                 <label class="control-label"><span>$ ${requestScope.price}</span></label>
                                 <div class="controls">
-                                    <input id="quantityToAdd"  type="number" class="span6" placeholder="Qty.">
+                                    <input id="quantityToAdd" min="1" required="true"  type="number" class="span6" placeholder="1">
                                 </div>
                             </div>
 
@@ -55,8 +61,8 @@
                             <p>
                                 ${requestScope.description}
                             <p>
-                                <button onclick="addProductToCart(${requestScope.id},${requestScope.price})" class="shopBtn"><span class=" icon-shopping-cart"></span> Add to cart</button>
-                        </form>
+                                <button id="addbtn" onclick="addProductToCart(${requestScope.id},${requestScope.price})" class="shopBtn"><span class=" icon-shopping-cart"></span> Add to cart</button>
+                        </div>
                     </div>
                 </div>
                 <hr class="softn clr"/>

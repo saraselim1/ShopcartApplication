@@ -19,7 +19,7 @@ import model.DAO.CategoryDAO;
  *
  * @author Pc
  */
-@WebServlet(name = "DeleteCategoryServlet", urlPatterns = {"/DeleteCategoryServlet"})
+//@WebServlet(name = "DeleteCategoryServlet", urlPatterns = {"/DeleteCategoryServlet"})
 public class DeleteCategoryServlet extends HttpServlet{
     
     @Override
