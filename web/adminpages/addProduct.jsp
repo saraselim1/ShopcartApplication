@@ -20,7 +20,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-3">
-                <form action ="${pageContext.request.contextPath}/AddProductSevlet" method = "GET" >
+                <form action="${pageContext.request.contextPath}/AddProductSevlet" method="post" ENCTYPE="MULTIPART/FORM-DATA" >
                     <script>console.log("${pageContext.request.contextPath}/AddProductSevlet");</script>
                 <div class="form-group">
                     <label>Name</label>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group">
                     <label>Quantity In Stock</label>
-                    <input name='quantity' value=""  min="0" type="number" class="form-control" placeholder="PLease Enter Keyword" />
+                    <input name="quantity" value=""  min="0" type="number" class="form-control" placeholder="PLease Enter Keyword" />
                 </div>
                 <div class="form-group">
                     <label>Price</label>
@@ -46,9 +46,13 @@
                     <label>Category ID</label>
                     <input name='categoryId' value=""  min="1" type="number" class="form-control" placeholder="PLease Enter Keyword" />
                 </div>
-                <div class="form-group">
+<!--                <div class="form-group">
                     <label>Img</label>
                     <input name='imgMaster' value="" type="text" class="form-control" placeholder="PLease Enter Keyword" />
+                </div>-->
+                <div class="form-group">
+                    <label>Img</label>
+                    <input name='productimg' value="" type="file" class="form-control" placeholder="Product Img" />
                 </div>
                 <button type="submit" class="btn btn-default">Submit Button</button>
                 <button type="reset" class="btn btn-primary">Reset Button</button>

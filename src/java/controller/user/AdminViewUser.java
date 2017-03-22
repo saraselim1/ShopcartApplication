@@ -21,22 +21,23 @@ import model.DAO.UserDao;
  */
 @WebServlet(name = "AdminViewUser", urlPatterns = {"/AdminViewUser"})
 public class AdminViewUser extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String uname = request.getParameter("uname");
         System.out.println("-------------" + uname);
-        
+
         UserDao dbConn = new UserDao();
-        if(dbConn.connect()){
+        if (dbConn.connect()) {
             // request.getParameter("userName")
             request.setAttribute("user", dbConn.getUser(uname));
             dbConn.disconnect();
-            
+
             RequestDispatcher rd = request.getRequestDispatcher("adminpages/viewProfile.jsp");
             rd.forward(request, response);
 
-    }
+        }
     }
 }

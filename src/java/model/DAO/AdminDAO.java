@@ -2,14 +2,15 @@ package model.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import model.beans.Admin;
 
 public class AdminDAO {
 
-    public boolean addAdmin(String name, String email) {
+    public boolean addAdmin(Admin admin) {
 
         boolean result = false;
 
@@ -20,9 +21,10 @@ public class AdminDAO {
 
         try {
 
-            PreparedStatement ps = con.prepareStatement("insert  into admin(name, email) values (? , ?)");
-            ps.setString(1, name);
-            ps.setString(2, email);
+            PreparedStatement ps = con.prepareStatement("insert  into admin(name, email, password) values (? , ?, ?)");
+            ps.setString(1, admin.getName());
+            ps.setString(2, admin.getEmail());
+            ps.setString(3, admin.getPassword());
 
             rowsUpd = ps.executeUpdate();
 
@@ -80,7 +82,7 @@ public class AdminDAO {
         return result;
     }
 
-    public boolean deleteAdmin(int id) {
+    public boolean deleteAdmin(String adminName) {
         boolean result = false;
 
         DBConnection db = new DBConnection();
@@ -88,7 +90,7 @@ public class AdminDAO {
 
         try {
             Statement stmt = con.createStatement();
-            int rowsUpd = stmt.executeUpdate("delete from admin where id = " + id);
+            int rowsUpd = stmt.executeUpdate("delete from admin where name = '" + adminName+"'");
 
             if (rowsUpd > 0) {
                 result = true;
@@ -107,13 +109,61 @@ public class AdminDAO {
         return result;
     }
 
-    public static void main(String[] args) {
+    public ArrayList getAdmins() {
 
-        AdminDAO admin = new AdminDAO();
+        DBConnection db = new DBConnection();
+        Connection con = db.getConnection();
+        ArrayList<Admin> admins = new ArrayList<>();
+        Statement stmt;
+        try {
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from admin");
 
-        boolean resu = admin.updateAdmin(4, "Belal", "belll@gmail.com");
-        System.out.println(resu);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String email = rs.getString(3);
+                String password = rs.getString(4);
 
+                Admin admin = new Admin(id, name, email, password);
+                admins.add(admin);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            db.stopConnection();
+        }
+
+        return admins;
+    }
+
+    public Admin getAdmin(String adminName) {
+
+        DBConnection db = new DBConnection();
+        Connection con = db.getConnection();
+        Statement stmt;
+        Admin admin = null;
+        try {
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from admin where name=" + adminName);
+
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String email = rs.getString(3);
+                String password = rs.getString(4);
+
+                admin = new Admin(id, name, email, password);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            db.stopConnection();
+        }
+
+        return admin;
     }
 
 }

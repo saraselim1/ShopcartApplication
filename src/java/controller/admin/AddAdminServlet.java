@@ -2,6 +2,7 @@ package controller.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,28 +10,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.DAO.AdminDAO;
 import model.DAO.DBConnection;
+import model.beans.Admin;
 
 @WebServlet(name = "AddAdminServlet", urlPatterns = {"/AddAdminServlet"})
 public class AddAdminServlet extends HttpServlet {
-    
-    
 
-   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-       String name =  request.getParameter("");
-       String email =  request.getParameter("");
-       
+
+        Admin admin = new Admin();
+        String name = request.getParameter("aname");
+        String email = request.getParameter("aemail");
+        String password = request.getParameter("apassword");
+        admin.setName(name);
+        admin.setEmail(email);
+        admin.setPassword(password);
         AdminDAO adminDAO = new AdminDAO();
+
+        boolean result = adminDAO.addAdmin(admin);
         
-        boolean result = adminDAO.addAdmin(name, email);
-        
-        
+       // request.setAttribute("admin",admin);
+            
+            response.sendRedirect("AdminViewServlet");
+
     }
 
-   
     @Override
     public String getServletInfo() {
         return "Short description";

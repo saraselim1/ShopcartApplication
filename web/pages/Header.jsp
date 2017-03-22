@@ -11,6 +11,7 @@
         <script src="${pageContext.request.contextPath}/assets/js/bootstrap.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/shop.js"></script>
         <link rel="${pageContext.request.contextPath}/shortcut icon" href="${pageContext.request.contextPath}/assets/ico/favicon.ico"/>
+        
         <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %></%@taglib>
         <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %></%@taglib>
         <%@page contentType="text/html" pageEncoding="UTF-8"%></%@page>
@@ -84,59 +85,36 @@
                                 <button type="button" onclick="requestProductListByName()" class="add-on"><i class="icon-search"></i></button>
                             </form>
                         </div>
-                        
-                        
-                        
                         <c:if test="${sessionScope.user == null}" >
-                    <ul class="nav pull-right">
-			
-                            <li class="dropdown">
-				<a data-toggle="dropdown" class="dropdown-toggle" href="#"><span class="icon-lock"></span> Login <b class="caret"></b></a>
-				<div class="dropdown-menu">
-                                    <form method="post" action="${pageContext.request.contextPath}/User" class="form-horizontal loginFrm">
-				  <div class="control-group">
-					<input type="text" class="span2" id="inputEmail" name="name" placeholder="Email">
-				  </div>
-				  <div class="control-group">
-					<input type="password" class="span2" id="inputPassword"  name="password" placeholder="Password">
-				  </div>
-				  <div class="control-group">
-					<label class="checkbox">
-					<input type="checkbox"> Remember me
-					</label>
-					<button type="submit" class="shopBtn btn-block">Sign in</button>
-				  </div>
-				</form>
-				</div>
-			</li>
-			</ul>    
-                            
-                            
-<!-- 
-                                        <form method="POST" action="User" class="form-horizontal loginFrm">
-                                            <div class="control-group">
-                                                <input type="text" class="span2" id="inputEmail" name="name" placeholder="UserName"> </div>
-                                            <div class="control-group">
-                                                <input type="password" class="span2" id="inputPassword" name="password" placeholder="Password"> </div>
-                                            <div class="control-group">
-                                                <label class="checkbox">
-                                                    <input type="checkbox"> Remember me </label>
-                                                <button id="signInBtn" type="submit" class="shopBtn btn-block">Sign in</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </li>
-                            </ul>
--->
-                        </c:if>
-                        <c:if test="${sessionScope.user != null}" >
                             <ul class="nav pull-right">
-                                <li class="dropdown"> <a href="">
-                                        <span class="icon-lock"></span> logout </a>
-
-                                </li>
-                            </ul>
-                        </c:if>
+                                    <li class="dropdown">
+                                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><span class="icon-lock"></span> Login <b class="caret"></b></a>
+                                        <div class="dropdown-menu">
+                                            <form method="post" action="${pageContext.request.contextPath}/User" class="form-horizontal loginFrm">
+                                                <div class="control-group">
+                                                    <input type="text" class="span2" id="inputEmail" name="name" placeholder="Email">
+                                                </div>
+                                                <div class="control-group">
+                                                    <input type="password" class="span2" id="inputPassword"  name="password" placeholder="Password">
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox"> Remember me
+                                                    </label>
+                                                    <button type="submit" class="shopBtn btn-block">Sign in</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>    
+                            </c:if>
+                            <c:if test="${sessionScope.user != null}" >
+                                <ul class="nav pull-right">
+                                    <li class="dropdown"> <a href="${pageContext.request.contextPath}/logoutServlet">
+                                            <span class="icon-lock"></span> logout </a>
+                                    </li>
+                                </ul>
+                            </c:if>
+                        </div>
                     </div>
                 </div>
-            </div>

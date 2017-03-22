@@ -17,12 +17,13 @@ import model.beans.User;
  * @author Masoud
  */
 public class UserDao extends DBConnector {
-    
+
     User user;
     List<User> users;
 
     public UserDao() {
-        select = "select * from users where user_name = ?";
+        select = "select * from users where user_name = ? and password = ? ";
+        select2 = "select * from users where user_name = ? ";
         insert = "insert into users (user_name, fname, lname, email, gender, password, address) values (?, ?, ?, ?, ?, ?, ?)";
         update = "update users set user_name = ?, fname = ?, lname = ?, email = ?, gender = ?, password = ?, address = ? where user_name = ?";
         delete = "delete from users where user_name = ?";
@@ -42,13 +43,22 @@ public class UserDao extends DBConnector {
         return users;
     }
 
-    public User getUser(String userName) {
+    public User getUser(String userName, String password) {
         runQuery(select);
+        user = null;
         try {
             pStatement.setString(1, userName);
+            pStatement.setString(2, password);
             resultSet = pStatement.executeQuery();
             if (resultSet.next()) {
-                user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8));
+                user = new User(resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5),
+                        resultSet.getString(6),
+                        resultSet.getString("password"),
+                        resultSet.getString("address"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -56,7 +66,29 @@ public class UserDao extends DBConnector {
         return user;
     }
 
-    public void addUser(User user) {
+    public User getUser(String userName) {
+        runQuery(select2);
+        user = null;
+        try {
+            pStatement.setString(1, userName);
+            resultSet = pStatement.executeQuery();
+            if (resultSet.next()) {
+                user = new User(resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5),
+                        resultSet.getString(6),
+                        resultSet.getString("password"),
+                        resultSet.getString("address"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+    }
+
+    public boolean addUser(User user) {
         try {
             runQuery(insert);
             pStatement.setString(1, user.getUserName());
@@ -66,11 +98,16 @@ public class UserDao extends DBConnector {
             pStatement.setString(5, user.getGender());
             pStatement.setString(6, user.getPassword());
             pStatement.setString(7, user.getAddress());
-            pStatement.executeUpdate();
+            int rowCount = pStatement.executeUpdate();
+            if (rowCount > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        return false;
     }
 
     public void updateUser(String userName, User user) {

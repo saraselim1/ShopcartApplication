@@ -38,7 +38,7 @@ public class UserFilter implements Filter {
         HttpSession session = req.getSession(false);
         User user = (User) session.getAttribute(userName);
 
-        if (session == null && user == null) {
+        if (session == null || user == null) {
             res.sendRedirect("Home");
         } else {
             chain.doFilter(request, response);

@@ -35,6 +35,7 @@ public abstract class DBConnector {
     protected PreparedStatement pStatement;
     protected ResultSet resultSet;
     protected String select;
+    protected String select2;
     protected String insert;
     protected String update;
     protected String delete;
