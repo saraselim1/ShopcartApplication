@@ -20,35 +20,18 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-3">
-                <form action ="${pageContext.request.contextPath}/AddProductSevlet" method = "GET" >
-                    <script>console.log("${pageContext.request.contextPath}/AddProductSevlet");</script>
+                <form action ="${pageContext.request.contextPath}/AddCategoryServlet" method = "GET" >
                 <div class="form-group">
                     <label>Name</label>
                     <input name='name' type="text" value="" class="form-control" placeholder="PLease Enter Keyword" />
-                </div>
-                <div class="form-group">
-                    <label>Quantity In Stock</label>
-                    <input name='quantity' value=""  min="0" type="number" class="form-control" placeholder="PLease Enter Keyword" />
-                </div>
-                <div class="form-group">
-                    <label>Price</label>
-                    <input name='price' value=""  min="0" type="number" class="form-control" placeholder="PLease Enter Keyword" />
-                </div>
-                <div class="form-group">
-                    <label>Offer</label>
-                    <input name='offer' value=""  min="0" type="number" class="form-control" placeholder="PLease Enter Keyword" />
                 </div>
                 <div class="form-group">
                     <label>Description</label>
                     <input name='description' value="" type="text" class="form-control" placeholder="PLease Enter Keyword" />
                 </div>
                 <div class="form-group">
-                    <label>Category ID</label>
-                    <input name='categoryId' value=""  min="1" type="number" class="form-control" placeholder="PLease Enter Keyword" />
-                </div>
-                <div class="form-group">
-                    <label>Img</label>
-                    <input name='imgMaster' value="" type="text" class="form-control" placeholder="PLease Enter Keyword" />
+                    <label>Product Number</label>
+                    <input name='productNum' value=""  min="0" type="number" class="form-control" placeholder="PLease Enter Keyword" />
                 </div>
                 <button type="submit" class="btn btn-default">Submit Button</button>
                 <button type="reset" class="btn btn-primary">Reset Button</button>

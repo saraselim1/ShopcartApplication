@@ -7,7 +7,6 @@ package controller.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,7 @@ import model.beans.User;
 
 /**
  *
- * @author Masoud
+ * @author Sara selim
  */
 public class GettingOneUserServlet extends HttpServlet {
 
@@ -42,9 +41,8 @@ public class GettingOneUserServlet extends HttpServlet {
                 session.setAttribute("user", user);
                 response.sendRedirect("pages/home.jsp");
             } else {
-                request.setAttribute("authentication", "failed");
-                RequestDispatcher rdView = getServletContext().getRequestDispatcher("/pages/home.jsp");
-                rdView.include(request, response);
+                PrintWriter out = response.getWriter();
+                out.println("not valiad");
             }
             dbConn.disconnect();
         }

@@ -29,6 +29,16 @@ public class UpdateProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Product product =new Product();
         ProductDAO productDAO =new ProductDAO();
+        System.out.println(request.getParameter("name"));
+        product.setName(request.getParameter("name").trim());
+        product.setId(Integer.parseInt(request.getParameter("id").trim()));
+        product.setCategoryId(Integer.parseInt(request.getParameter("categoryId").trim()));
+        product.setDescription(request.getParameter("description").trim());
+        product.setOffer(Integer.parseInt(request.getParameter("offer").trim()));
+        product.setPrice(Integer.parseInt(request.getParameter("price").trim()));
+        product.setImgMaster(request.getParameter("imgMaster").trim());
+        product.setQuantity(Integer.parseInt(request.getParameter("quantity").trim()));
+
         try{
             BeanUtils.populate(product,request.getParameterMap());
             if(productDAO.connect()){
@@ -41,6 +51,8 @@ public class UpdateProductServlet extends HttpServlet {
             Logger.getLogger(AddProductSevlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             productDAO.disconnect();
+            response.sendRedirect("adminpages/updateProduct.jsp");
+
         }
        
     }
@@ -49,6 +61,22 @@ public class UpdateProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Product product =new Product();
         ProductDAO productDAO =new ProductDAO();
+        System.out.println(request.getParameter("name"));
+        System.out.println(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
+        int catId = Integer.parseInt(request.getParameter("categoryId"));
+        int offer = Integer.parseInt(request.getParameter("offer"));
+        int price = Integer.parseInt(request.getParameter("price"));
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        product.setName(request.getParameter("name"));
+        product.setId(id);
+        product.setCategoryId(catId);
+        product.setDescription(request.getParameter("description"));
+        product.setOffer(offer);
+        product.setPrice(price);
+        product.setImgMaster(request.getParameter("imgMaster"));
+        product.setQuantity(quantity);
+
         try{
             BeanUtils.populate(product,request.getParameterMap());
             if(productDAO.connect()){
@@ -61,6 +89,7 @@ public class UpdateProductServlet extends HttpServlet {
             Logger.getLogger(AddProductSevlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             productDAO.disconnect();
+            response.sendRedirect("adminpages/updateProduct.jsp");
         }
     }
 }

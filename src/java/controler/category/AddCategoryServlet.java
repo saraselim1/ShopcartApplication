@@ -32,7 +32,7 @@ public class AddCategoryServlet extends HttpServlet{
         try{
             BeanUtils.populate(category,request.getParameterMap());
             if(categoryDAO.connect()){
-                categoryDAO.addCategory(category);
+                int rows=categoryDAO.addCategory(category);
             }
                   
        } catch (IllegalAccessException ex) {
@@ -41,6 +41,8 @@ public class AddCategoryServlet extends HttpServlet{
             Logger.getLogger(AddCategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             categoryDAO.disconnect();
+            response.sendRedirect(request.getSession().getServletContext().getContextPath()+"/adminpages/addCategory.jsp");
+
         }
        
     }

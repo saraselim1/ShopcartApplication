@@ -23,6 +23,7 @@ public class UserDao extends DBConnector {
 
     public UserDao() {
         select = "select * from users where user_name = ? and password = ? ";
+        select2 = "select * from users where user_name = ? ";
         insert = "insert into users (user_name, fname, lname, email, gender, password, address) values (?, ?, ?, ?, ?, ?, ?)";
         update = "update users set user_name = ?, fname = ?, lname = ?, email = ?, gender = ?, password = ?, address = ? where user_name = ?";
         delete = "delete from users where user_name = ?";
@@ -50,13 +51,35 @@ public class UserDao extends DBConnector {
             pStatement.setString(2, password);
             resultSet = pStatement.executeQuery();
             if (resultSet.next()) {
-                user = new User(resultSet.getInt(1), 
+                user = new User(resultSet.getInt(1),
                         resultSet.getString(2),
-                        resultSet.getString(3), 
-                        resultSet.getString(4), 
-                        resultSet.getString(5), 
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5),
                         resultSet.getString(6),
-                        resultSet.getString("password"), 
+                        resultSet.getString("password"),
+                        resultSet.getString("address"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+    }
+
+    public User getUser(String userName) {
+        runQuery(select2);
+        user = null;
+        try {
+            pStatement.setString(1, userName);
+            resultSet = pStatement.executeQuery();
+            if (resultSet.next()) {
+                user = new User(resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5),
+                        resultSet.getString(6),
+                        resultSet.getString("password"),
                         resultSet.getString("address"));
             }
         } catch (SQLException ex) {

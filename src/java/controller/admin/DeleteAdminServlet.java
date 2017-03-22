@@ -14,14 +14,16 @@ import model.DAO.DBConnection;
 public class DeleteAdminServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        int id = Integer.parseInt(request.getParameter(""));
+        String adminName = request.getParameter("adminName");
+        System.out.println("admin "+adminName);
 
         AdminDAO adminDAO = new AdminDAO();
 
-        boolean result = adminDAO.deleteAdmin(id);
+        boolean result = adminDAO.deleteAdmin(adminName);
+        response.sendRedirect("AdminViewServlet");
 
     }
 
