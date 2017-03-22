@@ -7,6 +7,7 @@ package controller.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -41,16 +42,20 @@ public class GettingOneUserServlet extends HttpServlet {
                 user.getCart().setProduct(cartProductDAO.getAllProductInCart(user.getCart().getId()));
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                if (remmberMe.equals("on")) {
-                    Cookie nameCookie = new Cookie("name", userName);
-                    Cookie passwordCookie = new Cookie("password", password);
-                    response.addCookie(nameCookie);
-                    response.addCookie(passwordCookie);
+                if (remmberMe != null) {
+                    if (remmberMe.equals("on")) {
+                        Cookie nameCookie = new Cookie("name", userName);
+                        Cookie passwordCookie = new Cookie("password", password);
+                        response.addCookie(nameCookie);
+                        response.addCookie(passwordCookie);
+                    }
                 }
                 response.sendRedirect("pages/home.jsp");
             } else {
-                PrintWriter out = response.getWriter();
-                out.println("not valiad");
+                String str = "login failed , user name or passsword is not correct";
+                request.setAttribute("msg", str);
+                RequestDispatcher rdView = getServletContext().getRequestDispatcher("/pages/home.jsp");
+                rdView.include(request, response);
             }
             dbConn.disconnect();
         }

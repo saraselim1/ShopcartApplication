@@ -39,6 +39,16 @@
                         }
                     }});
             }
+            function startLoading() {
+                getUserCookie();
+                if (${requestScope.msg != null}) {
+                    console.log( "${requestScope.msg}");
+                    window.alert("${requestScope.msg}");
+                    //$('#message').valaue("${requestScope.msg}");
+                    //$('#errorDiv').append('<label class="control-label" var="msg" valaue="${requestScope.msg} " style="color:red">${requestScope.msg}</label>');
+                    //$('#errorDiv').css("display", "block");
+                }
+            }
             function getUserCookie() {
                 $.ajax({
                     url: "Home?date" + new Date(),
@@ -46,13 +56,13 @@
                     contentType: 'application/json',
                     dataType: 'json',
                     success: function (data, textStatus, jqXHR) {
-                     }
+                    }
                 });
 
             }
         </script>
     </header>
-    <body onload="getUserCookie()">
+    <body onload="startLoading();">
         <!-- Upper Header Section -->
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="topNav">
@@ -71,6 +81,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="control-group">
+            <label id="message" class="control-label" var="msg" valaue="${msg}" style="color:red"></label>
         </div>
         <div class="container">
             <header id="header">

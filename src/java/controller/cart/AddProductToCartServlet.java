@@ -3,6 +3,7 @@ package controller.cart;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,8 +43,16 @@ public class AddProductToCartServlet extends HttpServlet {
                 }
                 productDAO.disconnect();
             } else {
-                request.setAttribute("msg", "Sorry Quanity is not valiad");
+            String str = "the quantity is not avaliable ";
+            request.setAttribute("msg", str);
+            RequestDispatcher rdView = getServletContext().getRequestDispatcher("/pages/home.jsp");
+            rdView.include(request, response);                request.setAttribute("msg", "Sorry Quanity is not valiad");
             }
+        } else {
+            String str = "Please logim firest ";
+            request.setAttribute("msg", str);
+            RequestDispatcher rdView = getServletContext().getRequestDispatcher("/pages/home.jsp");
+            rdView.include(request, response);
         }
     }
 

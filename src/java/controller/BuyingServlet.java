@@ -69,8 +69,10 @@ public class BuyingServlet extends HttpServlet {
             RequestDispatcher rdHeader = getServletContext().getRequestDispatcher("/pages/afterBuying.jsp");
             rdHeader.include(request, response);
         } else {
-            PrintWriter out = response.getWriter();
-            out.write("You don't hane enough money");
+            String str = "you don't have enough money ";
+            request.setAttribute("msg", str);
+            RequestDispatcher rdView = getServletContext().getRequestDispatcher("/pages/home.jsp");
+            rdView.include(request, response);
         }
 
     }

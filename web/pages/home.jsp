@@ -84,7 +84,10 @@
 
                     },
                     function (data, status) {
-                        console.log(data);
+                        if (${requestScope.msg != null}) {
+                            console.log("${requestScope.msg}");
+                            window.alert("${requestScope.msg}");
+                        }
                     });
         }
     </script>
@@ -108,10 +111,10 @@
     <div class="span4">
         <div class="offerNoteWrapper">
             <!-- hereeeeeeeeee-->
-                <form hidden method="Post" action="${pageContext.request.contextPath}/GetProductDetailsServ">
-                    <input hidden id="myText" type="text" name="productName" value="">
-                    <input hidden id="submitBtn" type='submit' />
-                </form>
+            <form hidden method="Post" action="${pageContext.request.contextPath}/GetProductDetailsServ">
+                <input hidden id="myText" type="text" name="productName" value="">
+                <input hidden id="submitBtn" type='submit' />
+            </form>
         </div>
     </div>
 </body>
